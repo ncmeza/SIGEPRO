@@ -19,11 +19,10 @@ public class Conexion {
     
     private String basededatos;
     private String usuario="root";
-    private String clave="riverplate";
-    private String servidor="172.20.68.123";
+    private String clave="nicomeza";
+    private String servidor="127.0.0.1";
     private Connection con;
     private Statement sql;
-        
 
    public Conexion(){
         

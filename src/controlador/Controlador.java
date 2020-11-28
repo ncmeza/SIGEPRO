@@ -33,14 +33,12 @@ public class Controlador implements ActionListener {
     
     
     public void actionPerformed(ActionEvent e){
-    
-     if(e.getActionCommand().equals(vistaPersonal.BTN_AGREGAR_PERSONAL)){
-   personal=new Personal(vistaPersonal.getLegajo(),vistaPersonal.getApellido(),vistaPersonal.getNombre(),
-   vistaPersonal.getDNI(),vistaPersonal.getRolPersonal());
-    System.out.println(personal);
-    PersonalDAO personalDAO =new PersonalDAO(conexion,personal);
-    personalDAO.agregar();
-    }
-    }
-    
+        if(e.getActionCommand().equals(vistaPersonal.BTN_AGREGAR_PERSONAL)){
+            personal=new Personal(vistaPersonal.getLegajo(),vistaPersonal.getApellido(),vistaPersonal.getNombre(),
+            vistaPersonal.getDNI(),vistaPersonal.getRolPersonal());
+            System.out.println(personal);
+            PersonalDAO personalDAO =new PersonalDAO(conexion,personal);
+            personalDAO.agregar();
+        }
+    }  
 }
