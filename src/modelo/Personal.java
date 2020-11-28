@@ -15,14 +15,15 @@ public class Personal {
     private String apellido;
     private String nombre;
     private int dni;
-    private RolPersonal rolPersonal;
+   // private RolPersonal rolPersonal;
+    private int RolPersonal;
 
-    public Personal(int legajo, String apellido, String nombre, int dni, RolPersonal rolPersonal) {
+    public Personal(int legajo, String apellido, String nombre, int dni, int rolPersonal) {
         this.legajo = legajo;
         this.apellido = apellido;
         this.nombre = nombre;
         this.dni = dni;
-        this.rolPersonal = rolPersonal;
+        this.RolPersonal= rolPersonal;
     }
 
     public int getLegajo() {
@@ -57,17 +58,26 @@ public class Personal {
         this.dni = dni;
     }
 
-    public RolPersonal getRolPersonal() {
+    /*public RolPersonal getRolPersonal() {
         return rolPersonal;
     }
 
     public void setRolPersonal(RolPersonal rolPersonal) {
         this.rolPersonal = rolPersonal;
+    }*/
+
+    public void setRolPersonal(int RolPersonal) {
+        this.RolPersonal = RolPersonal;
     }
+
+    public int getRolPersonal() {
+        return RolPersonal;
+    }
+    
 
     @Override
     public String toString() {
-        return "Personal{" + "legajo=" + legajo + ", apellido=" + apellido + ", nombre=" + nombre + ", dni=" + dni + ", rolPersonal=" + rolPersonal + '}';
+        return "Personal{" + "legajo=" + legajo + ", apellido=" + apellido + ", nombre=" + nombre + ", dni=" + dni + ", rolPersonal=" + RolPersonal + '}';
     }
     
     

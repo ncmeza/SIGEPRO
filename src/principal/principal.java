@@ -5,6 +5,9 @@
  */
 package principal;
 
+import controlador.Controlador;
+import modelo.Conexion;
+
 /**
  *
  * @author ncmeza
@@ -16,6 +19,16 @@ public class principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+         Controlador c;
+        Conexion con = new Conexion();
+       if( con.conectar() > 0 )
+       {
+        c = new Controlador(con);
+        c.ejecutar();
+           
+       }
+       else System.out.println("NO se conecto...");
+        
     }
     
 }
