@@ -39,7 +39,7 @@ public class Controlador implements ActionListener {
    vistaPersonal.getDNI(),vistaPersonal.getRolPersonal());
     System.out.println(personal);
     PersonalDAO personalDAO =new PersonalDAO(conexion,personal);
-    personalDAO.agregar2();
+    personalDAO.agregar();
     }
     }
     
