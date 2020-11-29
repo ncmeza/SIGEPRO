@@ -19,19 +19,25 @@ public class Controlador implements ActionListener {
     private VistaProyecto vistaProyecto;
     private Conexion conexion;
     private Personal personal;
+    private Proyecto nuevoProyecto;
     
     public Controlador(Conexion conexion){
-    
+    this.vistaProyecto = new VistaProyecto();
     this.conexion= conexion;
     }
     
     public void ejecutar(){
-    
+        vistaProyecto.setControlador(this);
+        vistaProyecto.ejecutar();
+        nuevoProyecto = new Proyecto();
     }
-    
     
     public void actionPerformed(ActionEvent e){
         
+        //Búsqueda cliente
+        if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
+            
+        }
         
         
     }  

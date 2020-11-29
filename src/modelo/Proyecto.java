@@ -16,6 +16,10 @@ public class Proyecto {
     private float costoProyecto;
     private String responsableProyecto;
     private boolean visibilidad;
+    
+    public Proyecto(){
+        //Constructor vacio intencional
+    }
 
     public Proyecto(String descripción, float avancePromedio, float costoProyecto, String ResponsableProyecto) {
         this.descripcion = descripción;
