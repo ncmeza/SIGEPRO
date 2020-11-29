@@ -17,6 +17,8 @@ public static final String BTN_CREAR_PROYECTO = "crean un nuevo proyecto";
 public static final String BTN_AGREGAR_TAREA = "permite ir a la ventana agregar tarea";
 public static final String BTN_ELIMINAR_PROYECTO = "permite eliminar un proyecto";
 public static final String BTN_MODIFICAR_PROYECTO = "permite modificar un proyecto";
+public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
+
     /**
      * Creates new form VistaProyecto
      */
@@ -33,10 +35,12 @@ public static final String BTN_MODIFICAR_PROYECTO = "permite modificar un proyec
         jButton5.setActionCommand(BTN_AGREGAR_TAREA);
         jButton3.setActionCommand(BTN_ELIMINAR_PROYECTO);
         jButton3.setActionCommand(BTN_MODIFICAR_PROYECTO);
+        jButton3.setActionCommand(BTN_BUSCAR_CLIENTE);
         jButton1.addActionListener(control);
         jButton5.addActionListener(control);
         jButton3.addActionListener(control);
         jButton4.addActionListener(control);
+        jButton8.addActionListener(control);
     }
 
     public int getIdProyecto (){
