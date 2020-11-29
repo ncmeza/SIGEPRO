@@ -14,6 +14,10 @@ public class Cliente {
     private int cuit;
     private String email;
     private int telefono;
+    
+    public Cliente(){
+        //Contructor vacio intencional
+    }
 
     public Cliente(String razonSocial, int cuit, String email, int telefono) {
         this.razonSocial = razonSocial;

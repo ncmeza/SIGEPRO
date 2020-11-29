@@ -25,8 +25,8 @@ public class principal {
         Conexion con = new Conexion();
         if( con.conectar() > 0 )
         {
-            //c = new Controlador(con);
-            //c.ejecutar();   
+            c = new Controlador(con);
+            c.ejecutar();   
         }
         else System.out.println("No se conecto a la base de datos...");
         

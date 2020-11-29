@@ -16,6 +16,7 @@ import modelo.Conexion;
  * @author Leonel
  */
 public class Controlador implements ActionListener {
+    private VistaBuscarCliente vistaBuscarCliente;
     private VistaProyecto vistaProyecto;
     private Conexion conexion;
     private Personal personal;
@@ -35,8 +36,13 @@ public class Controlador implements ActionListener {
     public void actionPerformed(ActionEvent e){
         
         //Búsqueda cliente
-        if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
+        if(e.getActionCommand().equals(vistaProyecto.BTN_BUSCAR_CLIENTE)){
+            vistaBuscarCliente = new VistaBuscarCliente();
+            vistaBuscarCliente.ejecutar();
             
+            ClienteDAO clientedao = new ClienteDAO(conexion);
+            Cliente cliente = clientedao.buscarClientePorCuit(vistaBuscarCliente.getCuit());
+            vistaBuscarCliente.setRazonSocial(cliente.getRazonSocial());
         }
         
         
