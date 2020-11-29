@@ -27,6 +27,7 @@ public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
         this.setTitle("Gestion de Proyectos");
     }
      public void ejecutar(){
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
         
     }
@@ -34,8 +35,8 @@ public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
         jButton1.setActionCommand(BTN_CREAR_PROYECTO);
         jButton5.setActionCommand(BTN_AGREGAR_TAREA);
         jButton3.setActionCommand(BTN_ELIMINAR_PROYECTO);
-        jButton3.setActionCommand(BTN_MODIFICAR_PROYECTO);
-        jButton3.setActionCommand(BTN_BUSCAR_CLIENTE);
+        jButton4.setActionCommand(BTN_MODIFICAR_PROYECTO);
+        jButton8.setActionCommand(BTN_BUSCAR_CLIENTE);
         jButton1.addActionListener(control);
         jButton5.addActionListener(control);
         jButton3.addActionListener(control);
@@ -48,7 +49,7 @@ public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
         try {
             a = Integer.parseInt(jTextField6.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
+            JOptionPane.showMessageDialog(null, "error en el tipo de dato 'id del proyecto'");
         }
         return a;
     }

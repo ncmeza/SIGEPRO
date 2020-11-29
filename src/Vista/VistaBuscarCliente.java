@@ -5,6 +5,8 @@
  */
 package Vista;
 
+
+import controlador.Controlador;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +26,12 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+     public void setControlador(Controlador control){
+         jButton3.setActionCommand(BTN_BUSCAR);
+         jButton1.setActionCommand(BTN_ACEPTAR_CLIENTE);
+         jButton3.addActionListener(control);
+         jButton1.addActionListener(control);
+        }
 
     public int getCuit (){
         int a = 0;
