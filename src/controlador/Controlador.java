@@ -38,10 +38,16 @@ public class Controlador implements ActionListener {
         //Búsqueda cliente
         if(e.getActionCommand().equals(vistaProyecto.BTN_BUSCAR_CLIENTE)){
             vistaBuscarCliente = new VistaBuscarCliente();
+            vistaBuscarCliente.setControlador(this);
             vistaBuscarCliente.ejecutar();
             
+            
+        }
+        
+        if(e.getActionCommand().equals(vistaBuscarCliente.BTN_BUSCAR)){
             ClienteDAO clientedao = new ClienteDAO(conexion);
             Cliente cliente = clientedao.buscarClientePorCuit(vistaBuscarCliente.getCuit());
+            System.out.println(""+cliente.getRazonSocial());
             vistaBuscarCliente.setRazonSocial(cliente.getRazonSocial());
         }
         

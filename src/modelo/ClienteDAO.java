@@ -27,12 +27,16 @@ public class ClienteDAO {
     public Cliente buscarClientePorCuit(int cuit){
         cliente = new Cliente();
         try{
+//            String sql = "SELECT cliente.razon_social FROM cliente WHERE cliente.cuit_cuil="+cuit+";";
             String sql = "SELECT cliente.*, localidad.nombre, provincia.nombre FROM cliente "
-                    + "JOIN localidad ON cliente.localidad_codigo_postal1 = localidad.codigopostal "
-                    + "JOIN provincia ON localidad.provincia_id_provincia = provincia.idprovincia "
-                    + "WHERE cliente.cuit="+cuit+";" ;
+                    + "JOIN localidad ON cliente.localidad_codigo_postal1 = localidad.codigo_postal "
+                    + "JOIN provincia ON localidad.provincia_idprovincia = provincia.idprovincia "
+                    + "WHERE cliente.cuit_cuil="+cuit+";";
             
             ResultSet fila = conexion.getSql().executeQuery(sql);
+            if(fila.next()){
+                System.out.println("Entramos en la matrix.");
+            }
             cliente.setCuit(cuit);
             cliente.setRazonSocial(fila.getString("razon_social"));
         }catch(SQLException e){
