@@ -24,7 +24,7 @@ public class Conexion {
     private Connection con;
     private Statement sql;
 
-   public Conexion(){
+    public Conexion(){
         
     }
     public int conectar(){

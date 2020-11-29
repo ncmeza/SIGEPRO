@@ -20,17 +20,16 @@ public class PersonalDAO {
         this.conexion = conexion;
     }
     
-    public void agregar(){
-        try{
-            String sql = "INSERT INTO adm_rec.personal SET legajo="+personal.getLegajo()+", apellido='"+personal.getApellido()+"', nombre='"+personal.getNombre()+"',"
-                    + " dni="+personal.getDni()+", rol_personal_idrol_personal="+personal.getRolPersonal()+";";
-            conexion.getSql().execute(sql);
-            
-            System.out.println("Personal agregado a la base de datos.");
-        }catch(SQLException e){
-            System.out.println("Error al agregar datos:"+e);
-        }
+//    public void agregar(){
+//        try{
+//            String sql = "INSERT INTO adm_rec.personal SET legajo="+personal.getLegajo()+", apellido='"+personal.getApellido()+"', nombre='"+personal.getNombre()+"',"
+//                    + " dni="+personal.getDni()+", rol_personal_idrol_personal="+personal.getRolPersonal()+";";
+//            conexion.getSql().execute(sql);
+//            
+//            System.out.println("Personal agregado a la base de datos.");
+//        }catch(SQLException e){
+//            System.out.println("Error al agregar datos:"+e);
+//        }
 
     }
-    
-}
+
