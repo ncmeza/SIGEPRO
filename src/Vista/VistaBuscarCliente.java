@@ -38,21 +38,21 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         try {
             a = Integer.parseInt(jTextField1.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
+            JOptionPane.showMessageDialog(null, "Error en el CUIT/CUIL ingresado.");
         }
         return a;
     }
       public void setCuit(int cuit){
         jTextField1.setText(Integer.toString(cuit));
     }
-      public String getRazonSocial () {
+      public String getRazonSocial (){
         String a = jTextField2.getText();
         return a;
     }
       public void setRazonSocial(String razonsocial){
         jTextField2.setText(razonsocial);
     }
-        public String getEmail () {
+        public String getEmail() {
         String a = jTextField3.getText();
         return a;
     }
@@ -60,7 +60,7 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         jTextField3.setText(email);
     }
       
-         public String getTelefono () {
+     public String getTelefono () {
         String a = jTextField4.getText();
         return a;
     }
@@ -76,8 +76,8 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         }
         return a;
     }
-      public void setProvincia(int provincia){
-        jTextField5.setText(Integer.toString(provincia));
+      public void setProvincia(String provincia){
+        jTextField5.setText(provincia);
     }
       public int getLocalidad (){
         int a = 0;
@@ -88,8 +88,8 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         }
         return a;
     }
-      public void setLocalidad(int idProyecto){
-        jTextField6.setText(Integer.toString(idProyecto));
+      public void setLocalidad(String localidad){
+        jTextField6.setText(localidad);
     }
     
     public int getIdCliente(){

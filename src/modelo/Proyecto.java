@@ -5,20 +5,31 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ncmeza
  */
 public class Proyecto {
-    
+    private int idproyecto;
     private String descripcion;
     private float avancePromedio;
     private float costoProyecto;
     private String responsableProyecto;
     private boolean visibilidad;
+    private int idcliente;
+    private ArrayList<Integer> fases;
+    private ArrayList<Tarea> tareas;
     
     public Proyecto(){
         //Constructor vacio intencional
+        fases.add(1);
+        fases.add(2);
+        fases.add(3);
+        fases.add(4);
+        fases.add(5);
+        tareas = new ArrayList<Tarea>();
     }
 
     public Proyecto(String descripción, float avancePromedio, float costoProyecto, String ResponsableProyecto) {
@@ -27,6 +38,22 @@ public class Proyecto {
         this.costoProyecto = costoProyecto;
         this.responsableProyecto = ResponsableProyecto;
         this.visibilidad = true;
+    }
+
+    public int getIdproyecto() {
+        return idproyecto;
+    }
+
+    public void setIdproyecto(int idproyecto) {
+        this.idproyecto = idproyecto;
+    }
+    
+    public int getIdcliente() {
+        return idcliente;
+    }
+
+    public void setIdcliente(int idcliente) {
+        this.idcliente = idcliente;
     }
 
     public String getDescripcion() {

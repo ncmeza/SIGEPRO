@@ -61,13 +61,13 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
       public Date getFechaInicio(){
           /*SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");//workbrench recibe string a pesar de estar en date
          String fechainicio= DateFor.format(FechaInicio.getDate());*/
-        Date fechainicio= FechaInicio.getDate();
+        Date fechainicio = FechaInicio.getDate();
         return fechainicio;
       }
       public Date getFechaFin(){
           /*SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");//workbrench recibe string a pesar de estar en date
          String fechainicio= DateFor.format(FechaInicio.getDate());*/
-        Date fechafin= FechaFin.getDate();
+        Date fechafin = FechaFin.getDate();
         return fechafin;
       }
         public int getGradoAvance (){
@@ -117,11 +117,9 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        FechaInicio = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        FechaFin = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -160,31 +158,21 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addComponent(jLabel4)
+                .addGap(58, 58, 58)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel5)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(39, 77, Short.MAX_VALUE))
             .addComponent(jSeparator1)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel5)
-                .addGap(27, 27, 27)
-                .addComponent(FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -294,8 +282,6 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser FechaFin;
-    private com.toedter.calendar.JDateChooser FechaInicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

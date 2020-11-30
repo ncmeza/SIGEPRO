@@ -12,12 +12,17 @@ import java.util.Date;
  */
 public class Tarea {
     
+    private int idfase;
     private String nombre;
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
     private int gradoAvance;
     private float costo;
+    
+    public Tarea(){
+        
+    }
 
     public Tarea(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int gradoAvance, float costo) {
         this.nombre = nombre;
@@ -26,6 +31,14 @@ public class Tarea {
         this.fechaFin = fechaFin;
         this.gradoAvance = gradoAvance;
         this.costo = costo;
+    }
+
+    public int getIdfase() {
+        return idfase;
+    }
+
+    public void setIdfase(int idfase) {
+        this.idfase = idfase;
     }
 
     public String getNombre() {

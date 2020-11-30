@@ -10,6 +10,7 @@ package modelo;
  * @author ncmeza
  */
 public class Cliente {
+    private int idcliente;
     private String razonSocial;
     private int cuit;
     private String email;
@@ -26,6 +27,14 @@ public class Cliente {
         this.cuit = cuit;
         this.email = email;
         this.telefono = telefono;
+    }
+
+    public int getIdcliente() {
+        return idcliente;
+    }
+
+    public void setIdcliente(int idcliente) {
+        this.idcliente = idcliente;
     }
 
     public String getRazonSocial() {

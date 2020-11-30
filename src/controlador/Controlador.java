@@ -16,8 +16,10 @@ import modelo.Conexion;
  * @author Leonel
  */
 public class Controlador implements ActionListener {
-    private VistaBuscarCliente vistaBuscarCliente;
+    
     private VistaProyecto vistaProyecto;
+    private VistaBuscarCliente vistaBuscarCliente;
+    private VistaAgregarTarea vistaAgregarTarea;
     private Conexion conexion;
     private Personal personal;
     private Proyecto nuevoProyecto;
@@ -47,6 +49,7 @@ public class Controlador implements ActionListener {
         if(e.getActionCommand().equals(vistaBuscarCliente.BTN_BUSCAR)){
             ClienteDAO clientedao = new ClienteDAO(conexion);
             Cliente cliente = clientedao.buscarClientePorCuit(vistaBuscarCliente.getCuit());
+            vistaBuscarCliente.setIdCliente(cliente.getIdcliente());
             System.out.println(""+cliente.getRazonSocial());
             vistaBuscarCliente.setRazonSocial(cliente.getRazonSocial());
             vistaBuscarCliente.setEmail(cliente.getEmail());
@@ -55,6 +58,25 @@ public class Controlador implements ActionListener {
             vistaBuscarCliente.setLocalidad(cliente.getLocalidad());
         }
         
+        if(e.getActionCommand().equals(vistaBuscarCliente.BTN_ACEPTAR_CLIENTE)){
+            nuevoProyecto.setIdcliente(vistaBuscarCliente.getIdCliente()); 
+        }
         
+        if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
+            nuevoProyecto.setIdproyecto(vistaProyecto.getIdProyecto());
+            nuevoProyecto.setDescripcion(vistaProyecto.getDescripcion());
+            nuevoProyecto.setResponsableProyecto(vistaProyecto.getResponsable());
+        }
+        
+        if(e.getActionCommand().equals(vistaProyecto.BTN_AGREGAR_TAREA)){
+            vistaAgregarTarea = new VistaAgregarTarea();
+            vistaAgregarTarea.setControlador(this);
+            vistaAgregarTarea.ejecutar();
+        }
+        
+        if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
+            Tarea tarea = new Tarea();
+            nuevoProyecto;
+        }
     }  
 }

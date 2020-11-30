@@ -37,6 +37,7 @@ public class ClienteDAO {
             if(fila.next()){
                 System.out.println("Entramos en la matrix.");
                 cliente.setCuit(cuit);
+                cliente.setIdcliente(fila.getInt("idcliente"));
                 cliente.setRazonSocial(fila.getString("razon_social"));
                 cliente.setEmail(fila.getString("email"));
                 cliente.setTelefono(fila.getInt("telefono"));
