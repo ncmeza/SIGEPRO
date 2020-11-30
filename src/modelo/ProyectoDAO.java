@@ -21,11 +21,21 @@ public class ProyectoDAO {
     
     public void agregar(){
         try{
-            String sql = "INSERT INO adrm_rec.proyecto SET descripcion_proyecto='"+ proyecto.getDescripcion()+
-                    "', promedio_avance="+ proyecto.getAvancePromedio()+
+            String sql = "INSERT INTO proyecto SET idproyecto="+ proyecto.getIdproyecto()+
+                    ", descripcion_proyecto='"+ proyecto.getDescripcion()+
+                    //"', promedio_avance="+ proyecto.getAvancePromedio()+
                     "', responsable_proyecto='"+ proyecto.getResponsableProyecto()+
-                    "'";
-            
+                    "', cliente_idcliente=" + proyecto.getIdcliente()+ ";" ;
+            conexion.getSql().execute(sql);
+            sql = "INSERT INTO proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 1 + ";";
+            conexion.getSql().execute(sql);
+            sql = "INSERT INTO adm_rec.proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto() + ", fase_idfase=" + 2 + ";";
+            conexion.getSql().execute(sql);
+            sql = "INSERT INTO adm_rec.proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 3 + ";";
+            conexion.getSql().execute(sql);
+            sql = "INSERT INTO adm_rec.proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 4 + ";";
+            conexion.getSql().execute(sql);
+            sql = "INSERT INTO adm_rec.proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 5 + ";";
             conexion.getSql().execute(sql);
         }catch(SQLException e){
             System.out.println("No se pudo agregar proyecto: "+e);

@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Tarea {
     
+    private int idtarea;
     private int idfase;
     private String nombre;
     private String descripcion;
@@ -31,6 +32,14 @@ public class Tarea {
         this.fechaFin = fechaFin;
         this.gradoAvance = gradoAvance;
         this.costo = costo;
+    }
+
+    public int getIdtarea() {
+        return idtarea;
+    }
+
+    public void setIdtarea(int idtarea) {
+        this.idtarea = idtarea;
     }
 
     public int getIdfase() {

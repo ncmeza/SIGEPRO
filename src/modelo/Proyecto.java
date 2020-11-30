@@ -24,6 +24,7 @@ public class Proyecto {
     
     public Proyecto(){
         //Constructor vacio intencional
+        fases = new ArrayList<Integer>();
         fases.add(1);
         fases.add(2);
         fases.add(3);
@@ -95,6 +96,24 @@ public class Proyecto {
     public void setVisibilidad(boolean visibilidad) {
         this.visibilidad = visibilidad;
     }
+
+    public ArrayList<Integer> getFases() {
+        return fases;
+    }
+
+    public void setFases(ArrayList<Integer> fases) {
+        this.fases = fases;
+    }
+
+    public ArrayList<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public void setTareas(ArrayList<Tarea> tareas) {
+        this.tareas = tareas;
+    }
+    
+    
 
     @Override
     public String toString() {

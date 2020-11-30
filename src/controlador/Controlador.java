@@ -59,13 +59,17 @@ public class Controlador implements ActionListener {
         }
         
         if(e.getActionCommand().equals(vistaBuscarCliente.BTN_ACEPTAR_CLIENTE)){
-            nuevoProyecto.setIdcliente(vistaBuscarCliente.getIdCliente()); 
+            nuevoProyecto.setIdcliente(vistaBuscarCliente.getIdCliente());
+            vistaProyecto.setCuit(vistaBuscarCliente.getCuit());
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
             nuevoProyecto.setIdproyecto(vistaProyecto.getIdProyecto());
             nuevoProyecto.setDescripcion(vistaProyecto.getDescripcion());
             nuevoProyecto.setResponsableProyecto(vistaProyecto.getResponsable());
+            
+            ProyectoDAO proyectodao = new ProyectoDAO(nuevoProyecto, conexion);
+            proyectodao.agregar();
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_AGREGAR_TAREA)){
@@ -76,7 +80,13 @@ public class Controlador implements ActionListener {
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
             Tarea tarea = new Tarea();
-            nuevoProyecto;
+            
+            tarea.setNombre(vistaAgregarTarea.getNombreTarea());
+            tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
+            tarea.setIdfase(vistaAgregarTarea.getFase());
+            
+            nuevoProyecto.getTareas().add(tarea);
+            
         }
     }  
 }
