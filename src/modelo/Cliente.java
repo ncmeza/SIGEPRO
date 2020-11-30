@@ -14,6 +14,8 @@ public class Cliente {
     private int cuit;
     private String email;
     private int telefono;
+    private String localidad;
+    private String provincia;
     
     public Cliente(){
         //Contructor vacio intencional
@@ -58,10 +60,24 @@ public class Cliente {
         this.telefono = telefono;
     }
 
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" + "razonSocial=" + razonSocial + ", cuit=" + cuit + ", email=" + email + ", telefono=" + telefono + '}';
+        return "Cliente{" + "razonSocial=" + razonSocial + ", cuit=" + cuit + ", email=" + email + ", telefono=" + telefono + ", localidad=" + localidad + ", provincia=" + provincia + '}';
     }
-    
-    
 }

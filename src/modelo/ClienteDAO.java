@@ -36,9 +36,13 @@ public class ClienteDAO {
             ResultSet fila = conexion.getSql().executeQuery(sql);
             if(fila.next()){
                 System.out.println("Entramos en la matrix.");
+                cliente.setCuit(cuit);
+                cliente.setRazonSocial(fila.getString("razon_social"));
+                cliente.setEmail(fila.getString("email"));
+                cliente.setTelefono(fila.getInt("telefono"));
+                cliente.setProvincia(fila.getString("provincia.nombre"));
+                cliente.setLocalidad(fila.getString("localidad.nombre"));
             }
-            cliente.setCuit(cuit);
-            cliente.setRazonSocial(fila.getString("razon_social"));
         }catch(SQLException e){
             System.out.println("No se encontraron resultados: "+e);
         }

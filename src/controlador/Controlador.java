@@ -49,6 +49,10 @@ public class Controlador implements ActionListener {
             Cliente cliente = clientedao.buscarClientePorCuit(vistaBuscarCliente.getCuit());
             System.out.println(""+cliente.getRazonSocial());
             vistaBuscarCliente.setRazonSocial(cliente.getRazonSocial());
+            vistaBuscarCliente.setEmail(cliente.getEmail());
+            vistaBuscarCliente.setTelefono(""+cliente.getTelefono());
+            vistaBuscarCliente.setProvincia(cliente.getProvincia());
+            vistaBuscarCliente.setLocalidad(cliente.getLocalidad());
         }
         
         
