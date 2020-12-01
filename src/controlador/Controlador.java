@@ -86,6 +86,8 @@ public class Controlador implements ActionListener {
             tarea.setIdfase(vistaAgregarTarea.getFase());
             
             nuevoProyecto.getTareas().add(tarea);
+            TareaDAO tareadao=new TareaDAO(tarea,conexion);
+            tareadao.agregar();
             
         }
     }  
