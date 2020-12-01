@@ -77,6 +77,8 @@ public class Controlador implements ActionListener {
             vistaAgregarTarea = new VistaAgregarTarea();
             vistaAgregarTarea.setControlador(this);
             vistaAgregarTarea.ejecutar();
+            vistaAgregarTarea.cargarTareas(listaTareas());
+            vistaAgregarTarea.cargarPersonal(listaPersonal());
         }
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
@@ -109,6 +111,12 @@ public class Controlador implements ActionListener {
             fila[5] = ""+ tarea.getCosto();
             lista.add(fila);
         }
+        return lista;
+    }
+    
+    public ArrayList<String[]> listaPersonal(){
+        ArrayList lista = new ArrayList();
+        
         return lista;
     }
 }
