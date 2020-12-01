@@ -35,7 +35,6 @@ public class ClienteDAO {
             
             ResultSet fila = conexion.getSql().executeQuery(sql);
             if(fila.next()){
-                System.out.println("Entramos en la matrix.");
                 cliente.setCuit(cuit);
                 cliente.setIdcliente(fila.getInt("idcliente"));
                 cliente.setRazonSocial(fila.getString("razon_social"));
