@@ -116,7 +116,14 @@ public class Controlador implements ActionListener {
     
     public ArrayList<String[]> listaPersonal(){
         ArrayList lista = new ArrayList();
-        
+        PersonalDAO personalDAO = new PersonalDAO(conexion);
+        for(Personal personal: personalDAO.buscarTodoPersonalConLegajo()){
+            String[] fila = new String[3];
+            fila[0]=""+ personal.getLegajo();
+            fila[1] = ""+ personal.getNombre();
+            fila[2] = ""+ personal.getApellido();
+            lista.add(fila);
+        }
         return lista;
     }
 }
