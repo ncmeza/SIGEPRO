@@ -8,6 +8,7 @@ package controlador;
 import Vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import modelo.*;
 import modelo.Conexion;
 
@@ -66,7 +67,7 @@ public class Controlador implements ActionListener {
         if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
             nuevoProyecto.setIdproyecto(vistaProyecto.getIdProyecto());
             nuevoProyecto.setDescripcion(vistaProyecto.getDescripcion());
-            nuevoProyecto.setResponsableProyecto(vistaProyecto.getResponsable());
+            nuevoProyecto.setResponsableProyecto(vistaProyecto.getResponsable());          
             
             ProyectoDAO proyectodao = new ProyectoDAO(nuevoProyecto, conexion);
             proyectodao.agregar();
@@ -84,11 +85,30 @@ public class Controlador implements ActionListener {
             tarea.setNombre(vistaAgregarTarea.getNombreTarea());
             tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
             tarea.setIdfase(vistaAgregarTarea.getFase());
+            tarea.setCosto(vistaAgregarTarea.getCostoTarea());
+            tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
+            tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
+            tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());
             
-            nuevoProyecto.getTareas().add(tarea);
-            TareaDAO tareadao=new TareaDAO(tarea,conexion);
-            tareadao.agregar();
+//            nuevoProyecto.getTareas().add(tarea);
+//            TareaDAO tareadao=new TareaDAO(tarea,conexion);
+//            tareadao.agregar();
             
         }
-    }  
+    }
+    
+    public ArrayList<String[]> listaTareas(){
+        ArrayList lista = new ArrayList();
+        for(Tarea tarea: nuevoProyecto.getTareas()){
+            String[] fila = new String[5];
+            fila[0]=""+ tarea.getIdtarea();
+            fila[1] = ""+ tarea.getIdfase();
+            fila[2] = ""+ tarea.getNombre();
+            fila[3] = ""+ tarea.getFechaInicio();
+            fila[4] = ""+ tarea.getFechaFin();
+            fila[5] = ""+ tarea.getCosto();
+            lista.add(fila);
+        }
+        return lista;
+    }
 }

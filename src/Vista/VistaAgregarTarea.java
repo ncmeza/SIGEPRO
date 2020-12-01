@@ -7,8 +7,10 @@ package Vista;
 
 import controlador.Controlador;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -106,6 +108,21 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
       public int getFase(){
 
           return jComboBox1.getSelectedIndex() + 1;
+      }
+      
+      public void cargarTareas(ArrayList<String[]> lista){
+          DefaultTableModel tabla = new DefaultTableModel();
+          tabla.addColumn("idTarea");
+          tabla.addColumn("Fase");
+          tabla.addColumn("Nombre");
+          tabla.addColumn("F. Inicio");
+          tabla.addColumn("F. Fin");
+          tabla.addColumn("Costo");
+          for(String[] fila: lista){
+              tabla.addColumn(fila);
+          }
+          jTable1.setModel(tabla);
+          
       }
     /**
      * This method is called from within the constructor to initialize the form.
