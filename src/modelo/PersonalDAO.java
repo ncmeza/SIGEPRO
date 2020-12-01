@@ -23,7 +23,7 @@ public class PersonalDAO {
     public ArrayList<Personal> buscarTodoPersonalConLegajo(){
         ArrayList<Personal> personales = new ArrayList<>();
         try{
-            String sql = "SELECT personal.legajo, personal.appellido, personal.nombre FROM personal;";
+            String sql = "SELECT personal.legajo, personal.apellido, personal.nombre FROM personal;";
             ResultSet fila = conexion.getSql().executeQuery(sql);
             while(fila.next()){
                 Personal personal = new Personal();
