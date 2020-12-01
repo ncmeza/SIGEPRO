@@ -37,7 +37,7 @@ public class Controlador implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
         
-        //Abre ventana para buscar cliente
+        //Búsqueda cliente
         if(e.getActionCommand().equals(vistaProyecto.BTN_BUSCAR_CLIENTE)){
             vistaBuscarCliente = new VistaBuscarCliente();
             vistaBuscarCliente.setControlador(this);
@@ -45,7 +45,7 @@ public class Controlador implements ActionListener {
             
             
         }
-        //Busca cliente por cuit/cuil
+        
         if(e.getActionCommand().equals(vistaBuscarCliente.BTN_BUSCAR)){
             ClienteDAO clientedao = new ClienteDAO(conexion);
             Cliente cliente = clientedao.buscarClientePorCuit(vistaBuscarCliente.getCuit());
