@@ -34,7 +34,7 @@ public class PersonalDAO {
             }
             System.out.println("Personal recuperado correctamente.");
         }catch(SQLException e){
-            System.out.println("No se pudo encontrar personal buscado.");
+            System.out.println("No se pudo encontrar personal buscado: " +e);
         }
         return personales;
     }
