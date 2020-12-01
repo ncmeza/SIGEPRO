@@ -83,7 +83,7 @@ public class Controlador implements ActionListener {
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
             Tarea tarea = new Tarea();
-            
+            tarea.setIdtarea(vistaAgregarTarea.getIdTarea());
             tarea.setNombre(vistaAgregarTarea.getNombreTarea());
             tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
             tarea.setIdfase(vistaAgregarTarea.getFase());
