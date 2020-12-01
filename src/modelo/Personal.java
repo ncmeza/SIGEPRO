@@ -17,6 +17,10 @@ public class Personal {
     private int dni;
    // private RolPersonal rolPersonal;
     private int RolPersonal;
+    
+    public Personal(){
+        //Constructor vacio a proposito
+    }
 
     public Personal(int legajo, String apellido, String nombre, int dni, int rolPersonal) {
         this.legajo = legajo;

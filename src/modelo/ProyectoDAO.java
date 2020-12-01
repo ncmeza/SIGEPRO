@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -37,6 +38,17 @@ public class ProyectoDAO {
             conexion.getSql().execute(sql);
             sql = "INSERT INTO adm_rec.proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 5 + ";";
             conexion.getSql().execute(sql);
+            //Recuperamos el idproyecto_fase de la tabla proyecto_fase
+            for(Tarea tarea: proyecto.getTareas()){
+                sql = "SELECT proyecto_fase.idproyecto_fase FROM proyecto_fase WHERE proyecto_idproyecto="+ proyecto.getIdproyecto()+" AND fase_idfase="+ tarea.getIdfase()+";";
+                ResultSet fila = conexion.getSql().executeQuery(sql);
+                int idfase_proyecto = 0;
+                if(fila.next()){
+                    idfase_proyecto = fila.getInt("idproyecto_fase");
+                }
+                tarea.setIdfase(idfase_proyecto);
+                TareaDAO taredao = new TareaDAO(tarea, conexion);
+            }
         }catch(SQLException e){
             System.out.println("No se pudo agregar proyecto: "+e);
         }
