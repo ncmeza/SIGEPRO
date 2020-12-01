@@ -119,7 +119,7 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
           tabla.addColumn("F. Fin");
           tabla.addColumn("Costo");
           for(String[] fila: lista){
-              tabla.addColumn(fila);
+              tabla.addRow(fila);
           }
           jTable1.setModel(tabla);
           
@@ -132,7 +132,7 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
           tabla.addColumn("Apellido");
           
           for(String[] fila: lista){
-              tabla.addColumn(fila);
+              tabla.addRow(fila);
           }
           jTable2.setModel(tabla);
       }
