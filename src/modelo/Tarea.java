@@ -14,12 +14,14 @@ public class Tarea {
     
     private int idtarea;
     private int idfase;
+    private int idproyecto_fase;
     private String nombre;
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
     private int gradoAvance;
     private float costo;
+    private int idpersonal;
     
     public Tarea(){
         
@@ -48,6 +50,14 @@ public class Tarea {
 
     public void setIdfase(int idfase) {
         this.idfase = idfase;
+    }
+
+    public int getIdproyecto_fase() {
+        return idproyecto_fase;
+    }
+
+    public void setIdproyecto_fase(int idproyecto_fase) {
+        this.idproyecto_fase = idproyecto_fase;
     }
 
     public String getNombre() {
@@ -96,6 +106,14 @@ public class Tarea {
 
     public void setCosto(float costo) {
         this.costo = costo;
+    }
+
+    public int getIdpersonal() {
+        return idpersonal;
+    }
+
+    public void setIdpersonal(int idpersonal) {
+        this.idpersonal = idpersonal;
     }
 
     @Override

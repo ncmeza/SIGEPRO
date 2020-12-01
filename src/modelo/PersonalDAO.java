@@ -5,7 +5,9 @@
  */
 package modelo;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,16 +22,25 @@ public class PersonalDAO {
         this.conexion = conexion;
     }
     
-//    public void agregar(){
-//        try{
-//            String sql = "INSERT INTO adm_rec.personal SET legajo="+personal.getLegajo()+", apellido='"+personal.getApellido()+"', nombre='"+personal.getNombre()+"',"
-//                    + " dni="+personal.getDni()+", rol_personal_idrol_personal="+personal.getRolPersonal()+";";
-//            conexion.getSql().execute(sql);
-//            
-//            System.out.println("Personal agregado a la base de datos.");
-//        }catch(SQLException e){
-//            System.out.println("Error al agregar datos:"+e);
-//        }
-
+    public ArrayList<Personal> buscarTodoPersonalConLegajo(){
+        try{
+            ArrayList<Personal> personales = new ArrayList<>();
+            String sql = "SELECT personal.legajo, personal.appellido, personal.nombre FROM personal;";
+            ResultSet fila = conexion.getSql().executeQuery(sql);
+            while(fila.next()){
+                personal = new Personal();
+                personal.setLegajo(fila.getInt("legajo"));
+                personal.setApellido(fila.getString("apellido"));
+                personal.setNombre(fila.getString("nombre"));
+            }
+            System.out.println("Personal recuperado correctamente.");
+            return personales;
+        }catch(SQLException e){
+            System.out.println("No se pudo encontrar personal buscado.");
+        }
+        return null;
     }
+
+
+}
 
