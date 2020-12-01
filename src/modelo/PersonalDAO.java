@@ -21,8 +21,8 @@ public class PersonalDAO {
     }
     
     public ArrayList<Personal> buscarTodoPersonalConLegajo(){
+        ArrayList<Personal> personales = new ArrayList<>();
         try{
-            ArrayList<Personal> personales = new ArrayList<>();
             String sql = "SELECT personal.legajo, personal.appellido, personal.nombre FROM personal;";
             ResultSet fila = conexion.getSql().executeQuery(sql);
             while(fila.next()){
@@ -30,13 +30,13 @@ public class PersonalDAO {
                 personal.setLegajo(fila.getInt("legajo"));
                 personal.setApellido(fila.getString("apellido"));
                 personal.setNombre(fila.getString("nombre"));
+                personales.add(personal);
             }
             System.out.println("Personal recuperado correctamente.");
-            return personales;
         }catch(SQLException e){
             System.out.println("No se pudo encontrar personal buscado.");
         }
-        return null;
+        return personales;
     }
 
 

@@ -21,7 +21,7 @@ public class Tarea {
     private Date fechaFin;
     private int gradoAvance;
     private float costo;
-    private int idpersonal;
+    private int personalLegajo;
     
     public Tarea(){
         
@@ -108,12 +108,12 @@ public class Tarea {
         this.costo = costo;
     }
 
-    public int getIdpersonal() {
-        return idpersonal;
+    public int getPersonalLegajo() {
+        return personalLegajo;
     }
 
-    public void setIdpersonal(int idpersonal) {
-        this.idpersonal = idpersonal;
+    public void setPersonalLegajo(int personalLegajo) {
+        this.personalLegajo = personalLegajo;
     }
 
     @Override

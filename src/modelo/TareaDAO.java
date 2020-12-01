@@ -35,7 +35,7 @@ public class TareaDAO {
             conexion.getSql().execute(sql);
             
             sql = "INSERT INTO adm_rec.personal_tarea SET tarea_idtarea="+ tarea.getIdtarea()+
-                    "";
+                    ", personal_legajo="+ tarea.getPersonalLegajo()+";";
             conexion.getSql().execute(sql);
             
             System.out.println("Tarea "+tarea.getNombre()+" agregada correctamente a la BD.");
