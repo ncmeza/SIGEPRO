@@ -14,11 +14,9 @@ import java.util.ArrayList;
  * @author Leonel
  */
 public class PersonalDAO {
-    private Personal personal;
     private Conexion conexion;
 
-    public PersonalDAO( Conexion conexion, Personal personal) {
-        this.personal = personal;
+    public PersonalDAO( Conexion conexion) {
         this.conexion = conexion;
     }
     
@@ -28,7 +26,7 @@ public class PersonalDAO {
             String sql = "SELECT personal.legajo, personal.appellido, personal.nombre FROM personal;";
             ResultSet fila = conexion.getSql().executeQuery(sql);
             while(fila.next()){
-                personal = new Personal();
+                Personal personal = new Personal();
                 personal.setLegajo(fila.getInt("legajo"));
                 personal.setApellido(fila.getString("apellido"));
                 personal.setNombre(fila.getString("nombre"));
