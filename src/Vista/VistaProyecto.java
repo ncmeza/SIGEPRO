@@ -6,13 +6,17 @@
 package Vista;
 
 import controlador.Controlador;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import Vista.*;
 
 /**
  *
  * @author Leonel
  */
 public class VistaProyecto extends javax.swing.JFrame {
+private VistaModificarTarea vistamodificar;
 public static final String BTN_CREAR_PROYECTO = "crean un nuevo proyecto";
 public static final String BTN_AGREGAR_TAREA = "permite ir a la ventana agregar tarea";
 public static final String BTN_ELIMINAR_PROYECTO = "permite eliminar un proyecto";
@@ -84,6 +88,23 @@ public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
         jTextField4.setText(responsable);
     }
       
+      //Codificacion de tabla
+      
+        public void cargarListaDeTareas(ArrayList<String []> tareas){
+        DefaultTableModel tabla= new DefaultTableModel();
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Descripcion");
+        tabla.addColumn("Fase");
+        tabla.addColumn("Fecha Inicio");
+        tabla.addColumn("Fecha Fin");
+        tabla.addColumn("Grado avance");
+        tabla.addColumn("Costo");
+        for(int i=0; tareas.size()>i;i++){
+        tabla.addRow(tareas.get(i));
+                                            }
+        jTable1.setModel(tabla);
+        
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -344,6 +365,11 @@ public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
 
         jButton6.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jButton6.setText("MODIFICAR TAREA");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jButton7.setText("SALIR");
@@ -404,6 +430,17 @@ public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+          if(jTable1.getSelectedRowCount()>0){
+          vistamodificar.setNombreTarea(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+          vistamodificar.setDescripcionTarea(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+          vistamodificar.setFechaInicio(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+          vistamodificar.setFechaFin(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+         // vistamodificar.setGradoAvance(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+    }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
