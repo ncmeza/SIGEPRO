@@ -91,6 +91,7 @@ public class Controlador implements ActionListener {
             tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
             tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
             tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());
+            //tarea.setPersonalLegajo(vistaAgregarTarea.getLegajo);
             nuevoProyecto.getTareas().add(tarea);
 //            nuevoProyecto.getTareas().add(tarea);
 //            TareaDAO tareadao=new TareaDAO(tarea,conexion);

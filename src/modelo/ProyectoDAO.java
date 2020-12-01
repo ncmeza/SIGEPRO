@@ -46,8 +46,9 @@ public class ProyectoDAO {
                 if(fila.next()){
                     idfase_proyecto = fila.getInt("idproyecto_fase");
                 }
-                tarea.setIdfase(idfase_proyecto);
-                TareaDAO taredao = new TareaDAO(tarea, conexion);
+                tarea.setIdproyecto_fase(idfase_proyecto);
+                TareaDAO tareadao = new TareaDAO(tarea, conexion);
+                tareadao.agregar();
             }
         }catch(SQLException e){
             System.out.println("No se pudo agregar proyecto: "+e);

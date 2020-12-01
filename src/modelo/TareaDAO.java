@@ -24,7 +24,8 @@ public class TareaDAO {
     public void agregar(){
     SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
         try{
-            String sql = "INSERT INTO adm_rec.tarea SET idfase="+ tarea.getIdfase()+ 
+            String sql = "INSERT INTO adm_rec.tarea SET idtarea="+ tarea.getIdtarea()+
+                    ", idfase="+ tarea.getIdfase()+ 
                     ", nombre_tarea='"+ tarea.getNombre()+
                     "', descripcion_tarea='"+ tarea.getDescripcion() +
                     "', fecha_inicio='"+ DateFor.format(tarea.getFechaInicio()) +
