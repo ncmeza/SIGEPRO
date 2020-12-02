@@ -31,7 +31,7 @@ public class TareaDAO {
         try{
             for(Tarea tareaTemp: tareas){
                 String sql = "UPDATE tarea SET grado_avance="+ tareaTemp.getGradoAvance()+
-                        "WHERE idtarea="+ tareaTemp.getIdtarea()+";";
+                        " WHERE idtarea="+ tareaTemp.getIdtarea()+";";
                 conexion.getSql().executeUpdate(sql);
             }
             System.out.println("Las tareas se actualizaron correctamente.");

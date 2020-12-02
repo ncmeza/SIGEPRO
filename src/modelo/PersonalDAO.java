@@ -20,6 +20,11 @@ public class PersonalDAO {
         this.conexion = conexion;
     }
     
+    public Personal login(String usuario, String clave){
+        //retornar un personal que coincida con clave y usuario, crear columnas clave, usuario en la tabla
+        return null;
+    }
+    
     public ArrayList<Personal> buscarTodoPersonalConLegajo(){
         ArrayList<Personal> personales = new ArrayList<>();
         try{
