@@ -34,10 +34,10 @@ public class Controlador implements ActionListener {
     }
     
     public void ejecutar(){
-//        vistaProyecto.setControlador(this);
-//        vistaProyecto.ejecutar();
-        vistaDesarrollador.ejecutar();
-        nuevoProyecto = new Proyecto();
+        vistaProyecto.setControlador(this);
+        vistaProyecto.ejecutar();
+//        vistaDesarrollador.ejecutar();
+//        nuevoProyecto = new Proyecto();
     }
     
     public void actionPerformed(ActionEvent e){
