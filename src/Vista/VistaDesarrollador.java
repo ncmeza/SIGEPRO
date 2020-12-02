@@ -502,12 +502,9 @@ public static final String BTN_SELECCIONAR_TAREA = "boton para seleccionar una t
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        if(jTable1.getSelectedRowCount()>0){
-        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        jTextField3.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+ 
     }//GEN-LAST:event_jButton4ActionPerformed
-    }
+   
     /**
      * @param args the command line arguments
      */
