@@ -24,6 +24,20 @@ public class ProyectoDAO {
         this.conexion = conexion;
     }
     
+    public void actualizarAvancePromedio(){
+        TareaDAO tareadao = new TareaDAO(conexion);
+        try{
+            String sql = "UPDATE proyecto SET promedio_avance="+ proyecto.calcularGradoAvance()+
+                    " WHERE idproyecto="+proyecto.getIdproyecto()+";";
+            conexion.getSql().executeUpdate(sql);
+            tareadao.actualizarGradoAvance(proyecto.getTareas());
+            System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+" no se actualizó correctamente.");
+        }catch(SQLException e){
+            System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+" no se actualizó correctamente:"
+                    + "\n"+e);
+        }
+    }
+    
     public Proyecto buscarProyecto(int idproyecto){
         Proyecto proyectoTmp = new Proyecto();
         TareaDAO tareadao = new TareaDAO(conexion);

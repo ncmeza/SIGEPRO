@@ -27,6 +27,19 @@ public class TareaDAO {
         this.conexion = conexion;
     }
     
+    public void actualizarGradoAvance(ArrayList<Tarea> tareas){
+        try{
+            for(Tarea tareaTemp: tareas){
+                String sql = "UPDATE tarea SET grado_avance="+ tareaTemp.getGradoAvance()+
+                        "WHERE idtarea="+ tareaTemp.getIdtarea()+";";
+                conexion.getSql().executeUpdate(sql);
+            }
+            System.out.println("Las tareas se actualizaron correctamente.");
+        }catch(SQLException e){
+            System.out.println("Las tareas no se actualizaron correctamente: "+e);
+        }
+    }
+    
     public ArrayList<Tarea> buscarTareaPorProyecto(int idproyecto){
         ArrayList<Tarea> tareas = new ArrayList<>();
         try{
