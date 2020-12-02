@@ -40,6 +40,22 @@ public class Proyecto {
         this.responsableProyecto = ResponsableProyecto;
         this.visibilidad = true;
     }
+    
+    public float calcularGradoAvance(){
+        int suma = 0;
+        for(Tarea tarea: tareas){
+            suma = suma + tarea.getGradoAvance();
+        }
+        return suma/tareas.size();
+    }
+    
+    public float calcularCosto(){
+        float suma = 0;
+        for(Tarea tarea: tareas){
+            suma = suma + tarea.getCosto();
+        }
+        return suma;
+    }
 
     public int getIdproyecto() {
         return idproyecto;

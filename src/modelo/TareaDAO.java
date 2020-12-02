@@ -5,8 +5,10 @@
  */
 package modelo;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,10 +17,46 @@ import java.text.SimpleDateFormat;
 public class TareaDAO {
     private Tarea tarea;
     private Conexion conexion;
+    
+    public TareaDAO(Conexion conexion){
+        this.conexion = conexion;
+    }
 
     public TareaDAO(Tarea tarea, Conexion conexion) {
         this.tarea = tarea;
         this.conexion = conexion;
+    }
+    
+    public ArrayList<Tarea> buscarTareaPorProyecto(int idproyecto){
+        ArrayList<Tarea> tareas = new ArrayList<>();
+        try{
+            String sql = "SELECT idproyecto_fase FROM proyecto_fase WHERE proyecto_idproyecto="+ idproyecto+";";
+            ResultSet fila = conexion.getSql().executeQuery(sql);
+            ArrayList<Integer> proyectoFases = new ArrayList<>();
+            while(fila.next()){
+                proyectoFases.add(fila.getInt("idproyecto_fase"));
+            }
+            
+            for(Integer idproyectofase: proyectoFases){
+                sql = "SELECT tarea.* FROM tarea WHERE proyecto_fase_idproyecto_fase="+ idproyectofase;
+                ResultSet row = conexion.getSql().executeQuery(sql);
+                while(row.next()){
+                    Tarea tareaTmp = new Tarea();
+                    tareaTmp.setIdtarea(row.getInt("idtarea"));
+                    tareaTmp.setIdfase(row.getInt("idfase"));
+                    tareaTmp.setNombre(row.getString("nombre_tarea"));
+                    tareaTmp.setDescripcion(row.getString("descripcion_tarea"));
+                    tareaTmp.setFechaInicio(row.getDate("fecha_inicio"));
+                    tareaTmp.setFechaFin(row.getDate("fecha_fin"));
+                    tareaTmp.setGradoAvance(row.getInt("grado_avance"));
+                    tareaTmp.setCosto(row.getFloat("costo_tarea"));
+                    tareas.add(tareaTmp);
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error al obtener tareas del proyecto: "+e);
+        }
+        return tareas;
     }
     
     public void agregar(){
