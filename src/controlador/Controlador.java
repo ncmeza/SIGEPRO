@@ -37,6 +37,7 @@ public class Controlador implements ActionListener {
     public void ejecutar(){
         vistaProyecto.setControlador(this);
         vistaProyecto.ejecutar();
+        vistaDesarrollador.setControlador(this);
         vistaDesarrollador.ejecutar();
         nuevoProyecto = new Proyecto();
     }
@@ -186,7 +187,7 @@ public class Controlador implements ActionListener {
         }
         
         for(Tarea tarea: tareasDelDesarrollador){
-            String[] fila = new String[4];
+            String[] fila = new String[5];
             fila[0] = ""+tarea.getIdtarea();
             fila[1] = tarea.getNombre();
             fila[2] = tarea.getDescripcion();

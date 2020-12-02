@@ -34,7 +34,7 @@ public class ProyectoDAO {
             if(fila.next()){
                 proyectoTmp.setIdproyecto(idproyecto);
                 proyectoTmp.setDescripcion(fila.getString("descripcion_proyecto"));
-                proyectoTmp.setAvancePromedio(fila.getFloat("grado_avance"));
+                proyectoTmp.setAvancePromedio(fila.getFloat("promedio_avance"));
                 proyectoTmp.setCostoProyecto(fila.getFloat("costo_proyecto"));
                 proyectoTmp.setResponsableProyecto(fila.getString("responsable_proyecto"));
                 proyectoTmp.setIdcliente(fila.getInt("cliente_idcliente"));
@@ -51,8 +51,8 @@ public class ProyectoDAO {
             String sql = "INSERT INTO proyecto SET idproyecto="+ proyecto.getIdproyecto()+
                     ", descripcion_proyecto='"+ proyecto.getDescripcion()+
                     "', promedio_avance="+ proyecto.calcularGradoAvance()+
-                    "', costo_proyecto="+ proyecto.calcularCosto()+
-                    "', responsable_proyecto='"+ proyecto.getResponsableProyecto()+
+                    ", costo_proyecto="+ proyecto.calcularCosto()+
+                    ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+
                     "', cliente_idcliente=" + proyecto.getIdcliente()+ ";" ;
             conexion.getSql().execute(sql);
             sql = "INSERT INTO proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 1 + ";";
