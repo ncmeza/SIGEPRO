@@ -91,7 +91,7 @@ public class Controlador implements ActionListener {
             tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
             tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
             tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());
-            //tarea.setPersonalLegajo(vistaAgregarTarea.getLegajo);
+            tarea.setPersonalLegajo(vistaAgregarTarea.getLegajoPersonal());
             nuevoProyecto.getTareas().add(tarea);
 //            nuevoProyecto.getTareas().add(tarea);
 //            TareaDAO tareadao=new TareaDAO(tarea,conexion);
@@ -103,7 +103,7 @@ public class Controlador implements ActionListener {
     public ArrayList<String[]> listaTareas(){
         ArrayList lista = new ArrayList();
         for(Tarea tarea: nuevoProyecto.getTareas()){
-            String[] fila = new String[5];
+            String[] fila = new String[6];
             fila[0]=""+ tarea.getIdtarea();
             fila[1] = ""+ tarea.getIdfase();
             fila[2] = ""+ tarea.getNombre();
