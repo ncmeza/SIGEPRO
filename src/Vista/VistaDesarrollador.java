@@ -48,7 +48,7 @@ public static final String BTN_SELECCIONAR_TAREA = "boton para seleccionar una t
         return Integer.parseInt(jTextField1.getText());
     }
       public void setIdProyecto(int idProyecto){
-        jTextField1.setText(Integer.toString(idProyecto));
+        jLabel12.setText(Integer.toString(idProyecto));
     }
       
       public void setDescripcion(String descripcion){
