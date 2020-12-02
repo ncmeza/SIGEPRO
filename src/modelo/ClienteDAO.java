@@ -27,7 +27,6 @@ public class ClienteDAO {
     public Cliente buscarClientePorCuit(int cuit){
         cliente = new Cliente();
         try{
-//            String sql = "SELECT cliente.razon_social FROM cliente WHERE cliente.cuit_cuil="+cuit+";";
             String sql = "SELECT cliente.*, localidad.nombre, provincia.nombre FROM cliente "
                     + "JOIN localidad ON cliente.localidad_codigo_postal1 = localidad.codigo_postal "
                     + "JOIN provincia ON localidad.provincia_idprovincia = provincia.idprovincia "
@@ -37,6 +36,31 @@ public class ClienteDAO {
             if(fila.next()){
                 cliente.setCuit(cuit);
                 cliente.setIdcliente(fila.getInt("idcliente"));
+                cliente.setRazonSocial(fila.getString("razon_social"));
+                cliente.setEmail(fila.getString("email"));
+                cliente.setTelefono(fila.getInt("telefono"));
+                cliente.setProvincia(fila.getString("provincia.nombre"));
+                cliente.setLocalidad(fila.getString("localidad.nombre"));
+            }
+        }catch(SQLException e){
+            System.out.println("No se encontraron resultados: "+e);
+        }
+        return cliente;
+    }
+    
+    public Cliente buscarClientePorId(int idcliente){
+        cliente = new Cliente();
+        try{
+            String sql = "SELECT cliente.*, localidad.nombre, provincia.nombre FROM cliente "
+                    + "JOIN localidad ON cliente.localidad_codigo_postal1 = localidad.codigo_postal "
+                    + "JOIN provincia ON localidad.provincia_idprovincia = provincia.idprovincia "
+                    + "WHERE cliente.idcliente="+idcliente+";";
+            
+            ResultSet fila = conexion.getSql().executeQuery(sql);
+            if(fila.next()){
+                
+                cliente.setIdcliente(idcliente);
+                cliente.setCuit(fila.getInt("cuit_cuil"));
                 cliente.setRazonSocial(fila.getString("razon_social"));
                 cliente.setEmail(fila.getString("email"));
                 cliente.setTelefono(fila.getInt("telefono"));
