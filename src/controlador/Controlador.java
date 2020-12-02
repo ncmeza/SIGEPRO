@@ -21,18 +21,22 @@ public class Controlador implements ActionListener {
     private VistaProyecto vistaProyecto;
     private VistaBuscarCliente vistaBuscarCliente;
     private VistaAgregarTarea vistaAgregarTarea;
+    private VistaDesarrollador vistaDesarrollador;
     private Conexion conexion;
-    private Personal personal;
+    private Personal personalDesarrollo = new Personal(); //esto es temporal, se tiene que instanciar en el login
     private Proyecto nuevoProyecto;
+    private Proyecto proyectoBuscado;
     
     public Controlador(Conexion conexion){
     this.vistaProyecto = new VistaProyecto();
+    this.vistaDesarrollador = new VistaDesarrollador();
     this.conexion= conexion;
     }
     
     public void ejecutar(){
-        vistaProyecto.setControlador(this);
-        vistaProyecto.ejecutar();
+//        vistaProyecto.setControlador(this);
+//        vistaProyecto.ejecutar();
+        vistaDesarrollador.ejecutar();
         nuevoProyecto = new Proyecto();
     }
     
@@ -96,11 +100,40 @@ public class Controlador implements ActionListener {
 //            nuevoProyecto.getTareas().add(tarea);
 //            TareaDAO tareadao=new TareaDAO(tarea,conexion);
 //            tareadao.agregar();
+        }
+        //VISTA DEL DESARROLLADOR
+        if(e.getActionCommand().equals(vistaDesarrollador.BTN_BUSCAR_PROYECTO)){
+            proyectoBuscado = buscarProyectoPorID(vistaDesarrollador.getIdProyecto());
+            vistaDesarrollador.setDescripcion(proyectoBuscado.getDescripcion());
+            vistaDesarrollador.setCostoProyecto(""+proyectoBuscado.getCostoProyecto());
+            vistaDesarrollador.setResponsable(proyectoBuscado.getResponsableProyecto());
+            vistaDesarrollador.setCuitCliente(buscarClientePorID(proyectoBuscado.getIdcliente()).getCuit());
+            vistaDesarrollador.setPromedioAvance(proyectoBuscado.getAvancePromedio());
+            vistaDesarrollador.cargarListaDeTareas(tareasDeUnDesarrollador(proyectoBuscado));
             
         }
-    }
+        
+        if(e.getActionCommand().equals(vistaDesarrollador.BTN_SELECCIONAR_TAREA)){
+            Tarea tareaSeleccionada = buscarTareaPorID(vistaDesarrollador.getIdTareaSeleccionada());
+            
+            vistaDesarrollador.setIDTarea(tareaSeleccionada.getIdtarea());
+            vistaDesarrollador.setNombreTarea(tareaSeleccionada.getNombre());
+            vistaDesarrollador.setDescripcionTarea(tareaSeleccionada.getDescripcion());
+            vistaDesarrollador.setGradoAvance(tareaSeleccionada.getGradoAvance());
+            vistaDesarrollador.setCostoTarea(tareaSeleccionada.getCosto());
+        }
+        
+        if(e.getActionCommand().equals(vistaDesarrollador.BTN_ACTUALIZAR_TAREA)){
+            Tarea tareaActualizada = buscarTareaPorID(vistaDesarrollador.getIDTarea());
+            tareaActualizada.setGradoAvance(vistaDesarrollador.getGradoAvance());
+            actualizarTarea();
+        }
+           
+    } 
+        
+        //METODOS UTILES
     
-    public ArrayList<String[]> listaTareas(){
+    private ArrayList<String[]> listaTareas(){
         ArrayList lista = new ArrayList();
         for(Tarea tarea: nuevoProyecto.getTareas()){
             String[] fila = new String[6];
@@ -115,7 +148,7 @@ public class Controlador implements ActionListener {
         return lista;
     }
     
-    public ArrayList<String[]> listaPersonal(){
+    private ArrayList<String[]> listaPersonal(){
         ArrayList lista = new ArrayList();
         PersonalDAO personalDAO = new PersonalDAO(conexion);
         for(Personal personal: personalDAO.buscarTodoPersonalConLegajo()){
@@ -126,5 +159,50 @@ public class Controlador implements ActionListener {
             lista.add(fila);
         }
         return lista;
+    }
+    
+    private Proyecto buscarProyectoPorID(int idProyecto){
+        
+        return new Proyecto();
+    }
+    
+    private Cliente buscarClientePorID(int idCliente){
+        return new Cliente();
+    }
+    
+    private ArrayList<String[]> tareasDeUnDesarrollador(Proyecto proyecto){
+        ArrayList<Tarea> tareasDelDesarrollador = new ArrayList<>();
+        ArrayList<String[]> filasTareas = new ArrayList<>();
+        for(Tarea tarea: proyecto.getTareas()){
+            if(tarea.getPersonalLegajo() == personalDesarrollo.getLegajo()){
+                tareasDelDesarrollador.add(tarea);
+            }
+        }
+        
+        for(Tarea tarea: tareasDelDesarrollador){
+            String[] fila = new String[4];
+            fila[0] = ""+tarea.getIdtarea();
+            fila[1] = tarea.getNombre();
+            fila[2] = tarea.getDescripcion();
+            fila[3] = ""+tarea.getGradoAvance();
+            fila[4] = ""+tarea.getCosto();
+            
+            filasTareas.add(fila);
+        }
+        return filasTareas;
+    }
+    
+    public Tarea buscarTareaPorID(int IDtarea){
+        Tarea resultado = new Tarea();
+        for(Tarea tarea: proyectoBuscado.getTareas()){
+            if(tarea.getIdtarea()==IDtarea){
+                resultado = tarea;
+            }
+        }
+        return resultado;
+    }
+    
+    public void actualizarTarea(){
+        
     }
 }
