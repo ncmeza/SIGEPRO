@@ -174,7 +174,8 @@ public class Controlador implements ActionListener {
     }
     
     private Cliente buscarClientePorID(int idCliente){
-        return new Cliente();
+        ClienteDAO clienteDAO = new ClienteDAO(conexion);
+        return clienteDAO.buscarClientePorCuit(idCliente);
     }
     
     private ArrayList<String[]> tareasDeUnDesarrollador(Proyecto proyecto){
