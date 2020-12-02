@@ -9,6 +9,7 @@ import Vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.*;
 import modelo.Conexion;
 
@@ -36,7 +37,7 @@ public class Controlador implements ActionListener {
     public void ejecutar(){
         vistaProyecto.setControlador(this);
         vistaProyecto.ejecutar();
-//        vistaDesarrollador.ejecutar();
+        vistaDesarrollador.ejecutar();
         nuevoProyecto = new Proyecto();
     }
     
@@ -87,16 +88,21 @@ public class Controlador implements ActionListener {
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
             Tarea tarea = new Tarea();
-            tarea.setIdtarea(vistaAgregarTarea.getIdTarea());
-            tarea.setNombre(vistaAgregarTarea.getNombreTarea());
-            tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
-            tarea.setIdfase(vistaAgregarTarea.getFase());
-            tarea.setCosto(vistaAgregarTarea.getCostoTarea());
-            tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
-            tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
-            tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());
-            tarea.setPersonalLegajo(vistaAgregarTarea.getLegajoPersonal());
-            nuevoProyecto.getTareas().add(tarea);
+            if(vistaAgregarTarea.getLegajoPersonal()>0){
+                tarea.setIdtarea(vistaAgregarTarea.getIdTarea());
+                tarea.setNombre(vistaAgregarTarea.getNombreTarea());
+                tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
+                tarea.setIdfase(vistaAgregarTarea.getFase());
+                tarea.setCosto(vistaAgregarTarea.getCostoTarea());
+                tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
+                tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
+                tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());           
+                tarea.setPersonalLegajo(vistaAgregarTarea.getLegajoPersonal());
+                nuevoProyecto.getTareas().add(tarea);
+            }else{
+                JOptionPane.showMessageDialog(vistaAgregarTarea, "Se debe asignar personal a la tarea");
+            }
+            
 //            nuevoProyecto.getTareas().add(tarea);
 //            TareaDAO tareadao=new TareaDAO(tarea,conexion);
 //            tareadao.agregar();
@@ -162,8 +168,8 @@ public class Controlador implements ActionListener {
     }
     
     private Proyecto buscarProyectoPorID(int idProyecto){
-        
-        return new Proyecto();
+        ProyectoDAO proyecto = new ProyectoDAO(conexion);       
+        return proyecto.buscarProyecto(idProyecto);
     }
     
     private Cliente buscarClientePorID(int idCliente){

@@ -99,8 +99,12 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
     }
     
       public int getLegajoPersonal(){
-        String legajo=jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
-        int legajo2=Integer.parseInt(legajo);
+          int legajo2 = 0;
+          if(jTable2.getSelectedRowCount()>0){
+              String legajo=jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
+              legajo2=Integer.parseInt(legajo);
+          }
+        
         return legajo2;
       }
       public void setFase(){
