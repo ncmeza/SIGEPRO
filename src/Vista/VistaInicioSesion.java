@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package Vista;
 
 import controlador.Controlador;
 import javax.swing.JOptionPane;
@@ -31,14 +31,14 @@ public static final String BTN_INGRESAR = "boton para iniciar sesion";
         ingresarBtn.addActionListener(control);
         
         }
-       public int getLegajo (){
-        int legajo = 0;
+       public String getUsuario (){
+        String usuario = null;
         try {
-            legajo = Integer.parseInt(usuarioField.getText());
+           usuario = usuarioField.getText();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error: Usuario Inexistente");
         }
-        return legajo;
+        return usuario;
     }
     
     public String getContraseña(){

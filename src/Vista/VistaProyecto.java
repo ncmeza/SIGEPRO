@@ -23,6 +23,7 @@ public static final String BTN_ELIMINAR_PROYECTO = "permite eliminar un proyecto
 public static final String BTN_MODIFICAR_PROYECTO = "permite modificar un proyecto";
 public static final String BTN_BUSCAR_CLIENTE = "permite buscar cliente";
 public static final String BTN_MODIFICAR_TAREA = "permite ir a la ventana modificar tarea";
+public static final String BTN_BUSCAR_PROYECTO = "buscar proyecto";
 
     /**
      * Creates new form VistaProyecto
@@ -38,12 +39,14 @@ public static final String BTN_MODIFICAR_TAREA = "permite ir a la ventana modifi
     }
     public void setControlador(Controlador control){
         jButton1.setActionCommand(BTN_CREAR_PROYECTO);
+        jButton2.setActionCommand(BTN_BUSCAR_PROYECTO);
         jButton5.setActionCommand(BTN_AGREGAR_TAREA);
         jButton3.setActionCommand(BTN_ELIMINAR_PROYECTO);
         jButton4.setActionCommand(BTN_MODIFICAR_PROYECTO);
         jButton8.setActionCommand(BTN_BUSCAR_CLIENTE);
         jButton6.setActionCommand(BTN_MODIFICAR_TAREA);
         jButton1.addActionListener(control);
+        jButton2.addActionListener(control);
         jButton5.addActionListener(control);
         jButton3.addActionListener(control);
         jButton4.addActionListener(control);
@@ -107,12 +110,12 @@ public static final String BTN_MODIFICAR_TAREA = "permite ir a la ventana modifi
        public void setDescripcionBuscarPro(String descripcion){
         jTextField7.setText(descripcion);
     }
-       public String getCostoProyectoBuscarPro () {
-        String a = jTextField9.getText();
+       public float getCostoProyectoBuscarPro () {
+        float a = Float.parseFloat(jTextField9.getText());
         return a;
     }
-       public void setCostoProyectoBuscarPro(String costo){
-        jTextField9.setText(costo);
+       public void setCostoProyectoBuscarPro(float costo){
+        jTextField9.setText(Float.toString(costo));
     }
        public float getAvancePromBuscarPro(){
         float a = 0;
@@ -143,19 +146,27 @@ public static final String BTN_MODIFICAR_TAREA = "permite ir a la ventana modifi
       
         public void cargarListaDeTareas(ArrayList<String []> tareas){
         DefaultTableModel tabla= new DefaultTableModel();
-        tabla.addColumn("Nombre");
-        tabla.addColumn("Descripcion");
-        tabla.addColumn("Fase");
-        tabla.addColumn("Fecha Inicio");
-        tabla.addColumn("Fecha Fin");
-        tabla.addColumn("Grado avance");
-        tabla.addColumn("Costo");
+          tabla.addColumn("idTarea");
+          tabla.addColumn("Fase");
+          tabla.addColumn("Nombre");
+          tabla.addColumn("F. Inicio");
+          tabla.addColumn("F. Fin");
+          tabla.addColumn("Costo");
+          tabla.addColumn("Grado Avance");
         for(int i=0; tareas.size()>i;i++){
         tabla.addRow(tareas.get(i));
                                             }
         jTable1.setModel(tabla);
         
       }
+        
+    public int getIDtareaParaActualizar(){
+          int idTarea = 0;
+          if(jTable1.getSelectedRowCount()>0){
+              idTarea = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());             
+          }
+          return idTarea;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -436,21 +447,22 @@ public static final String BTN_MODIFICAR_TAREA = "permite ir a la ventana modifi
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                .addGap(463, 463, 463)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(287, 287, 287)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,16 +471,12 @@ public static final String BTN_MODIFICAR_TAREA = "permite ir a la ventana modifi
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6)
-                        .addGap(83, 83, 83)))
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
                 .addContainerGap())
         );
 

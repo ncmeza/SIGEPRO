@@ -6,6 +6,7 @@
 package controlador;
 
 import Vista.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,51 +24,75 @@ public class Controlador implements ActionListener {
     private VistaBuscarCliente vistaBuscarCliente;
     private VistaAgregarTarea vistaAgregarTarea;
     private VistaDesarrollador vistaDesarrollador;
+    private VistaInicioSesion vistaInicioSesion;
     private Conexion conexion;
-    private Personal personalDesarrollo = new Personal(); //esto es temporal, se tiene que instanciar en el login
+    private Personal personalDesarrollo; //esto es temporal, se tiene que instanciar en el login
     private Proyecto nuevoProyecto;
     private Proyecto proyectoBuscado;
     
     public Controlador(Conexion conexion){
     this.vistaProyecto = new VistaProyecto();
     this.vistaDesarrollador = new VistaDesarrollador();
+    this.vistaInicioSesion = new VistaInicioSesion();
     this.conexion= conexion;
     }
     
     public void ejecutar(){
-        vistaProyecto.setControlador(this);
-        vistaProyecto.ejecutar();
-        vistaDesarrollador.setControlador(this);
-        vistaDesarrollador.ejecutar();
-        nuevoProyecto = new Proyecto();
+      vistaInicioSesion.setControlador(this);
+      vistaInicioSesion.ejecutar();
+//        vistaProyecto.setControlador(this);
+//        vistaProyecto.ejecutar();
+//        vistaDesarrollador.setControlador(this);
+//        vistaDesarrollador.ejecutar();
+//        nuevoProyecto = new Proyecto();
     }
     
     public void actionPerformed(ActionEvent e){
+        //Inicio sesion
+        if(e.getActionCommand().equals(vistaInicioSesion.BTN_INGRESAR)){
+            Personal personal = personalLogin(vistaInicioSesion.getUsuario(),vistaInicioSesion.getContraseña());
+            if(personal.getRolPersonal() == 1){
+                nuevoProyecto = new Proyecto();
+                vistaProyecto.setControlador(this);
+                vistaProyecto.ejecutar();
+            }else{
+                vistaDesarrollador.setControlador(this);
+                vistaDesarrollador.ejecutar();
+                personalDesarrollo = personal;
+            }
+        }
         
         //Búsqueda cliente
         if(e.getActionCommand().equals(vistaProyecto.BTN_BUSCAR_CLIENTE)){
             vistaBuscarCliente = new VistaBuscarCliente();
             vistaBuscarCliente.setControlador(this);
-            vistaBuscarCliente.ejecutar();
-            
-            
+            vistaBuscarCliente.ejecutar(); 
         }
         
         if(e.getActionCommand().equals(vistaBuscarCliente.BTN_BUSCAR)){
             ClienteDAO clientedao = new ClienteDAO(conexion);
             Cliente cliente = clientedao.buscarClientePorCuit(vistaBuscarCliente.getCuit());
-            vistaBuscarCliente.setIdCliente(cliente.getIdcliente());
-            System.out.println(""+cliente.getRazonSocial());
-            vistaBuscarCliente.setRazonSocial(cliente.getRazonSocial());
-            vistaBuscarCliente.setEmail(cliente.getEmail());
-            vistaBuscarCliente.setTelefono(""+cliente.getTelefono());
-            vistaBuscarCliente.setProvincia(cliente.getProvincia());
-            vistaBuscarCliente.setLocalidad(cliente.getLocalidad());
+            if(cliente.getRazonSocial() != null){
+                vistaBuscarCliente.setIdCliente(cliente.getIdcliente());
+                System.out.println(""+cliente.getRazonSocial());
+                vistaBuscarCliente.setRazonSocial(cliente.getRazonSocial());
+                vistaBuscarCliente.setEmail(cliente.getEmail());
+                vistaBuscarCliente.setTelefono(""+cliente.getTelefono());
+                vistaBuscarCliente.setProvincia(cliente.getProvincia());
+                vistaBuscarCliente.setLocalidad(cliente.getLocalidad());
+            }else{
+                JOptionPane.showMessageDialog(null, "Cliente invalido");
+            }
+            
         }
         
         if(e.getActionCommand().equals(vistaBuscarCliente.BTN_ACEPTAR_CLIENTE)){
-            nuevoProyecto.setIdcliente(vistaBuscarCliente.getIdCliente());
-            vistaProyecto.setCuit(vistaBuscarCliente.getCuit());
+            if(vistaBuscarCliente.getIdCliente() != 0){
+                nuevoProyecto.setIdcliente(vistaBuscarCliente.getIdCliente());
+                vistaProyecto.setCuit(vistaBuscarCliente.getCuit());
+            }else{
+                JOptionPane.showMessageDialog(null,"Se debe Ingresar un cliente" );
+            }        
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
@@ -77,37 +102,72 @@ public class Controlador implements ActionListener {
             
             ProyectoDAO proyectodao = new ProyectoDAO(nuevoProyecto, conexion);
             proyectodao.agregar();
+            nuevoProyecto = new Proyecto();
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_AGREGAR_TAREA)){
             vistaAgregarTarea = new VistaAgregarTarea();
             vistaAgregarTarea.setControlador(this);
             vistaAgregarTarea.ejecutar();
-            vistaAgregarTarea.cargarTareas(listaTareas());
+            vistaAgregarTarea.setIdTarea(ultimoIDdeTarea());
+            vistaAgregarTarea.cargarTareas(listaTareas(nuevoProyecto));
             vistaAgregarTarea.cargarPersonal(listaPersonal());
+        }
+        
+        if(e.getActionCommand().equals(vistaProyecto.BTN_BUSCAR_PROYECTO)){
+            proyectoBuscado = buscarProyectoPorID(vistaProyecto.getIdProyectoBuscarPro());
+            vistaProyecto.setDescripcionBuscarPro(proyectoBuscado.getDescripcion());
+            vistaProyecto.setAvancePromBuscarPro(proyectoBuscado.getAvancePromedio());
+            vistaProyecto.setCostoProyectoBuscarPro(proyectoBuscado.getCostoProyecto());
+            vistaProyecto.setResponsableBuscarPro(proyectoBuscado.getResponsableProyecto());
+            vistaProyecto.setCuitBuscarPro(buscarClientePorID(proyectoBuscado.getIdcliente()).getCuit());
+            vistaProyecto.cargarListaDeTareas(listaTareas(proyectoBuscado));
+        }
+        
+        if(e.getActionCommand().equals(vistaProyecto.BTN_MODIFICAR_PROYECTO)){
+            proyectoBuscado.setDescripcion(vistaProyecto.getDescripcionBuscarPro());
+            proyectoBuscado.setCostoProyecto(vistaProyecto.getCostoProyectoBuscarPro());
+            actualizarProyecto(proyectoBuscado);
+        }
+        
+        if(e.getActionCommand().equals(vistaProyecto.BTN_MODIFICAR_TAREA)){
+            Tarea tarea = buscarTareaPorID(vistaProyecto.getIDtareaParaActualizar());
+            //Actualizar tarea
         }
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
             Tarea tarea = new Tarea();
             if(vistaAgregarTarea.getLegajoPersonal()>0){
-                tarea.setIdtarea(vistaAgregarTarea.getIdTarea());
-                tarea.setNombre(vistaAgregarTarea.getNombreTarea());
-                tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
-                tarea.setIdfase(vistaAgregarTarea.getFase());
-                tarea.setCosto(vistaAgregarTarea.getCostoTarea());
-                tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
-                tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
-                tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());           
-                tarea.setPersonalLegajo(vistaAgregarTarea.getLegajoPersonal());
-                nuevoProyecto.getTareas().add(tarea);
+                if(!existeLaTareaEnNuevoProyecto(vistaAgregarTarea.getIdTarea())){
+                    tarea.setIdtarea(vistaAgregarTarea.getIdTarea());
+                    tarea.setNombre(vistaAgregarTarea.getNombreTarea());
+                    tarea.setDescripcion(vistaAgregarTarea.getDescripcionTarea());
+                    tarea.setIdfase(vistaAgregarTarea.getFase());
+                    tarea.setCosto(vistaAgregarTarea.getCostoTarea());
+                    tarea.setFechaInicio(vistaAgregarTarea.getFechaInicio());
+                    tarea.setFechaFin(vistaAgregarTarea.getFechaFin());
+                    tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());           
+                    tarea.setPersonalLegajo(vistaAgregarTarea.getLegajoPersonal());
+                    nuevoProyecto.getTareas().add(tarea);
+                    vistaAgregarTarea.cargarTareas(listaTareas(nuevoProyecto));
+                }else{
+                    JOptionPane.showMessageDialog(null, "La tarea ya existe");
+                }
+                
             }else{
-                JOptionPane.showMessageDialog(vistaAgregarTarea, "Se debe asignar personal a la tarea");
+                JOptionPane.showMessageDialog(null, "Se debe asignar personal a la tarea");
             }
             
 //            nuevoProyecto.getTareas().add(tarea);
 //            TareaDAO tareadao=new TareaDAO(tarea,conexion);
 //            tareadao.agregar();
         }
+        
+        if(e.getActionCommand().equals(vistaAgregarTarea.BTN_ELIMINAR_TAREA)){
+            eliminarTareaDeNuevoProyecto(vistaAgregarTarea.getIDtareaParaBorrar());
+            vistaAgregarTarea.cargarTareas(listaTareas(nuevoProyecto));
+        }
+        
         //VISTA DEL DESARROLLADOR
         if(e.getActionCommand().equals(vistaDesarrollador.BTN_BUSCAR_PROYECTO)){
             proyectoBuscado = buscarProyectoPorID(vistaDesarrollador.getIdProyecto());
@@ -135,21 +195,46 @@ public class Controlador implements ActionListener {
             tareaActualizada.setGradoAvance(vistaDesarrollador.getGradoAvance());
             actualizarTarea();
         }
+        
            
     } 
         
         //METODOS UTILES
     
-    private ArrayList<String[]> listaTareas(){
-        ArrayList lista = new ArrayList();
+    private int ultimoIDdeTarea(){
+        //Hacer consulta en base de datos
+        return 0;
+    }
+    
+    private void eliminarTareaDeNuevoProyecto(int idTarea){
+        for(int i = 0; i < nuevoProyecto.getTareas().size(); i++){
+            if(nuevoProyecto.getTareas().get(i).getIdtarea() == idTarea){
+                nuevoProyecto.getTareas().remove(i);
+            }
+        }
+    }
+    
+    private boolean existeLaTareaEnNuevoProyecto(int id){
+        boolean resultado = false;
         for(Tarea tarea: nuevoProyecto.getTareas()){
-            String[] fila = new String[6];
+            if(tarea.getIdtarea() == id){
+                resultado = true;
+            }
+        }
+        return resultado;
+    }
+    
+    private ArrayList<String[]> listaTareas(Proyecto proyecto){
+        ArrayList lista = new ArrayList();
+        for(Tarea tarea: proyecto.getTareas()){
+            String[] fila = new String[7];
             fila[0]=""+ tarea.getIdtarea();
             fila[1] = ""+ tarea.getIdfase();
             fila[2] = ""+ tarea.getNombre();
             fila[3] = ""+ tarea.getFechaInicio();
             fila[4] = ""+ tarea.getFechaFin();
             fila[5] = ""+ tarea.getCosto();
+            fila[6] = ""+tarea.getGradoAvance();
             lista.add(fila);
         }
         return lista;
@@ -213,5 +298,14 @@ public class Controlador implements ActionListener {
     public void actualizarTarea(){
         ProyectoDAO proyectodao = new ProyectoDAO(conexion);
         proyectodao.actualizarAvancePromedio(proyectoBuscado);
+    }
+    
+    public void actualizarProyecto(Proyecto proyecto){
+        
+    }
+    
+    public Personal personalLogin(String usuario, String contra){
+        PersonalDAO personalDAO = new PersonalDAO(conexion);
+        return personalDAO.login(usuario, contra);
     }
 }

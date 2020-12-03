@@ -38,7 +38,7 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         try {
             a = Integer.parseInt(jTextField1.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error en el CUIT/CUIL ingresado.");
+            //JOptionPane.showMessageDialog(null, "Error en el CUIT/CUIL ingresado.");
         }
         return a;
     }
@@ -72,7 +72,7 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         try {
             a = Integer.parseInt(jTextField5.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
+            //JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
         }
         return a;
     }
@@ -84,7 +84,7 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         try {
             a = Integer.parseInt(jTextField6.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
+            //JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
         }
         return a;
     }
@@ -97,7 +97,7 @@ public class VistaBuscarCliente extends javax.swing.JFrame {
         try {
             a = Integer.parseInt(jTextField7.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
+            //JOptionPane.showMessageDialog(null, "error en el tipo de dato 'Codigo Del Producto'");
         }
         return a;
     }

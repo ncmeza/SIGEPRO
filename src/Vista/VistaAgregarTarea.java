@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VistaAgregarTarea extends javax.swing.JFrame {
 public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar tarea";
+public static final String BTN_ELIMINAR_TAREA = "boton para agreagar tarea";
     /**
      * Creates new form VistaTarea
      */
@@ -32,6 +33,8 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
         public void setControlador(Controlador control){
         jButton1.setActionCommand(BTN_AGREGAR_TAREA);
         jButton1.addActionListener(control);
+        jButton4.setActionCommand(BTN_ELIMINAR_TAREA);
+        jButton4.addActionListener(control);
         
         setFase();
         
@@ -107,6 +110,15 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
         
         return legajo2;
       }
+      
+      public int getIDtareaParaBorrar(){
+          int idTarea = 0;
+          if(jTable1.getSelectedRowCount()>0){
+              idTarea = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());             
+          }
+          return idTarea;
+      }
+      
       public void setFase(){
           jComboBox1.addItem("Analisis");
           jComboBox1.addItem("Desarrollo");
@@ -127,6 +139,7 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
           tabla.addColumn("F. Inicio");
           tabla.addColumn("F. Fin");
           tabla.addColumn("Costo");
+          tabla.addColumn("Grado Avance");
           for(String[] fila: lista){
               tabla.addRow(fila);
           }
@@ -184,6 +197,7 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -374,6 +388,8 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
             }
         });
 
+        jButton4.setText("Eliminar Tarea");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -396,7 +412,10 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jButton4)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -419,11 +438,13 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
                         .addComponent(jLabel1)
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))))
         );
@@ -439,7 +460,7 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -457,6 +478,7 @@ public static final String BTN_AGREGAR_TAREA = "boton para confirmar y agregar t
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
