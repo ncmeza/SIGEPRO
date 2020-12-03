@@ -63,9 +63,18 @@ public class TareaDAO {
                     tareaTmp.setFechaFin(row.getDate("fecha_fin"));
                     tareaTmp.setGradoAvance(row.getInt("grado_avance"));
                     tareaTmp.setCosto(row.getFloat("costo_tarea"));
+                    String sqlTarea = "SELECT personal_legajo FROM personal_tarea WHERE tarea_idtarea="+ tareaTmp.getIdtarea() + ";";
+                    ResultSet filaTarea = conexion.getSql().executeQuery(sqlTarea);
+                    if(filaTarea.next()){
+                        tareaTmp.setPersonalLegajo(filaTarea.getInt("personal_legajo"));
+                    }
+                    
                     tareas.add(tareaTmp);
                 }
             }
+            
+            
+            
         }catch(SQLException e){
             System.out.println("Error al obtener tareas del proyecto: "+e);
         }

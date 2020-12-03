@@ -31,6 +31,7 @@ public class Proyecto {
         fases.add(4);
         fases.add(5);
         tareas = new ArrayList<Tarea>();
+        this.visibilidad = true;
     }
 
     public Proyecto(String descripción, float avancePromedio, float costoProyecto, String ResponsableProyecto) {
@@ -105,7 +106,7 @@ public class Proyecto {
         this.responsableProyecto = responsableProyecto;
     }
 
-    public boolean isVisibilidad() {
+    public boolean getVisibilidad() {
         return visibilidad;
     }
 

@@ -67,7 +67,8 @@ public class ProyectoDAO {
                     "', promedio_avance="+ proyecto.calcularGradoAvance()+
                     ", costo_proyecto="+ proyecto.calcularCosto()+
                     ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+
-                    "', cliente_idcliente=" + proyecto.getIdcliente()+ ";" ;
+                    ", visibilidad="+ proyecto.getVisibilidad() + 
+                    "', cliente_idcliente=" + proyecto.getIdcliente()+ ";";
             conexion.getSql().execute(sql);
             sql = "INSERT INTO proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 1 + ";";
             conexion.getSql().execute(sql);
