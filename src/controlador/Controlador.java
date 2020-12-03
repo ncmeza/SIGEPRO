@@ -128,6 +128,7 @@ public class Controlador implements ActionListener {
         if(e.getActionCommand().equals(vistaProyecto.BTN_MODIFICAR_PROYECTO)){
             proyectoBuscado.setDescripcion(vistaProyecto.getDescripcionBuscarPro());
             proyectoBuscado.setCostoProyecto(vistaProyecto.getCostoProyectoBuscarPro());
+            proyectoBuscado.setResponsableProyecto(vistaProyecto.getResponsable());
             actualizarProyecto(proyectoBuscado);
         }
         
@@ -139,7 +140,7 @@ public class Controlador implements ActionListener {
             vistaModificarTarea.setIdTarea(tarea.getIdtarea());
             vistaModificarTarea.setNombreTarea(tarea.getNombre());
             vistaModificarTarea.setDescripcionTarea(tarea.getDescripcion());
-            vistaModificarTarea.setFase();
+            vistaModificarTarea.setFase(tarea.getIdfase());
             vistaModificarTarea.setFechaInicio(tarea.getFechaInicio().toString());
             vistaModificarTarea.setFechaFin(tarea.getFechaFin().toString());
             vistaModificarTarea.setGradoAvance(tarea.getGradoAvance());
@@ -155,7 +156,14 @@ public class Controlador implements ActionListener {
             tarea.setFechaFin(vistaModificarTarea.getFechaFin());
             tarea.setGradoAvance(vistaModificarTarea.getGradoAvance());
             vistaProyecto.cargarListaDeTareas(listaTareas(proyectoBuscado));
-            actualizarTareaVistaProyecto(tarea);           
+            actualizarTareaVistaProyecto(tarea);
+            proyectoBuscado = buscarProyectoPorID(vistaProyecto.getIdProyectoBuscarPro());
+            vistaProyecto.setDescripcionBuscarPro(proyectoBuscado.getDescripcion());
+            vistaProyecto.setAvancePromBuscarPro(proyectoBuscado.getAvancePromedio());
+            vistaProyecto.setCostoProyectoBuscarPro(proyectoBuscado.getCostoProyecto());
+            vistaProyecto.setResponsableBuscarPro(proyectoBuscado.getResponsableProyecto());
+            vistaProyecto.setCuitBuscarPro(buscarClientePorID(proyectoBuscado.getIdcliente()).getCuit());
+            vistaProyecto.cargarListaDeTareas(listaTareas(proyectoBuscado));
         }
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
