@@ -132,7 +132,16 @@ public class Controlador implements ActionListener {
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_MODIFICAR_TAREA)){
             Tarea tarea = buscarTareaPorID(vistaProyecto.getIDtareaParaActualizar());
-            //Actualizar tarea
+            VistaModificarTarea vistaModificarTarea = new VistaModificarTarea();
+            vistaModificarTarea.setControlador(this);
+            vistaModificarTarea.ejecutar();
+            tarea.setNombre(vistaModificarTarea.getNombreTarea());
+            tarea.setDescripcion(vistaModificarTarea.getNombreTarea());
+            tarea.setIdfase(vistaModificarTarea.getFase());
+            tarea.setFechaInicio(vistaModificarTarea.getFechaInicio());
+            tarea.setFechaFin(vistaModificarTarea.getFechaFin());
+            tarea.setGradoAvance(vistaModificarTarea.getGradoAvance());
+            actualizarTareaVistaProyecto();
         }
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
@@ -193,7 +202,7 @@ public class Controlador implements ActionListener {
         if(e.getActionCommand().equals(vistaDesarrollador.BTN_ACTUALIZAR_TAREA)){
             Tarea tareaActualizada = buscarTareaPorID(vistaDesarrollador.getIDTarea());
             tareaActualizada.setGradoAvance(vistaDesarrollador.getGradoAvance());
-            actualizarTarea();
+            actualizarTareaVistaDesarrollador();
         }
         
            
@@ -295,12 +304,16 @@ public class Controlador implements ActionListener {
         return resultado;
     }
     
-    public void actualizarTarea(){
+    public void actualizarTareaVistaDesarrollador(){
         ProyectoDAO proyectodao = new ProyectoDAO(conexion);
         proyectodao.actualizarAvancePromedio(proyectoBuscado);
     }
     
     public void actualizarProyecto(Proyecto proyecto){
+        //
+    }
+    
+    public void actualizarTareaVistaProyecto(){
         
     }
     
