@@ -25,6 +25,7 @@ public class Controlador implements ActionListener {
     private VistaAgregarTarea vistaAgregarTarea;
     private VistaDesarrollador vistaDesarrollador;
     private VistaInicioSesion vistaInicioSesion;
+    private VistaModificarTarea vistaModificarTarea;
     private Conexion conexion;
     private Personal personalDesarrollo; //esto es temporal, se tiene que instanciar en el login
     private Proyecto nuevoProyecto;
@@ -132,16 +133,29 @@ public class Controlador implements ActionListener {
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_MODIFICAR_TAREA)){
             Tarea tarea = buscarTareaPorID(vistaProyecto.getIDtareaParaActualizar());
-            VistaModificarTarea vistaModificarTarea = new VistaModificarTarea();
+            vistaModificarTarea = new VistaModificarTarea();
             vistaModificarTarea.setControlador(this);
             vistaModificarTarea.ejecutar();
+            vistaModificarTarea.setIdTarea(tarea.getIdtarea());
+            vistaModificarTarea.setNombreTarea(tarea.getNombre());
+            vistaModificarTarea.setDescripcionTarea(tarea.getDescripcion());
+            vistaModificarTarea.setFase();
+            vistaModificarTarea.setFechaInicio(tarea.getFechaInicio().toString());
+            vistaModificarTarea.setFechaFin(tarea.getFechaFin().toString());
+            vistaModificarTarea.setGradoAvance(tarea.getGradoAvance());
+            vistaModificarTarea.setCostoTarea(tarea.getCosto());
+        }
+        
+        if(e.getActionCommand().equals(vistaModificarTarea.BTN_MODIFICAR_TAREA)){
+            Tarea tarea = buscarTareaPorID(vistaModificarTarea.getIdTarea());
             tarea.setNombre(vistaModificarTarea.getNombreTarea());
             tarea.setDescripcion(vistaModificarTarea.getNombreTarea());
             tarea.setIdfase(vistaModificarTarea.getFase());
             tarea.setFechaInicio(vistaModificarTarea.getFechaInicio());
             tarea.setFechaFin(vistaModificarTarea.getFechaFin());
             tarea.setGradoAvance(vistaModificarTarea.getGradoAvance());
-            actualizarTareaVistaProyecto();
+            vistaProyecto.cargarListaDeTareas(listaTareas(proyectoBuscado));
+            actualizarTareaVistaProyecto(tarea);           
         }
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_AGREGAR_TAREA)){
@@ -166,10 +180,6 @@ public class Controlador implements ActionListener {
             }else{
                 JOptionPane.showMessageDialog(null, "Se debe asignar personal a la tarea");
             }
-            
-//            nuevoProyecto.getTareas().add(tarea);
-//            TareaDAO tareadao=new TareaDAO(tarea,conexion);
-//            tareadao.agregar();
         }
         
         if(e.getActionCommand().equals(vistaAgregarTarea.BTN_ELIMINAR_TAREA)){
@@ -310,10 +320,15 @@ public class Controlador implements ActionListener {
     }
     
     public void actualizarProyecto(Proyecto proyecto){
-        //
+        ProyectoDAO proyectoDAO = new ProyectoDAO(conexion);
+        proyectoDAO.actualizarAvancePromedio(proyectoBuscado);
     }
     
-    public void actualizarTareaVistaProyecto(){
+    public void actualizarTareaVistaProyecto(Tarea tarea){
+        TareaDAO tareaDAO = new TareaDAO(conexion);
+        ProyectoDAO proyectoDAO = new ProyectoDAO(conexion);
+        tareaDAO.modificarTarea(tarea);
+        proyectoDAO.modificarProyecto(proyectoBuscado);
         
     }
     

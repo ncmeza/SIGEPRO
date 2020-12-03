@@ -27,6 +27,33 @@ public class TareaDAO {
         this.conexion = conexion;
     }
     
+    public void modificarTarea(Tarea tareaTemp){
+        try{
+            String sql = "UPDATE tarea SET nombre_tarea='"+ tareaTemp.getNombre()+
+                    "', descripcion_tarea="+ tareaTemp.getDescripcion()+
+                    "', fecha_inicio="+ tareaTemp.getFechaInicio()+
+                    ", fecha_fin="+ tareaTemp.getFechaFin()+
+                    ", grado_avance="+ tareaTemp.getGradoAvance()+
+                    ", costo_tarea="+ tareaTemp.getCosto()+" WHERE idtarea="+ tareaTemp.getIdtarea()+";";
+            conexion.getSql().executeUpdate(sql);
+        }catch(SQLException e){
+            
+        }
+    }
+    
+    public void actualizarCostoTarea(ArrayList<Tarea> tareas){
+        try{
+            for(Tarea tareaTemp: tareas){
+                String sql = "UPDATE tarea SET costo_tarea="+ tareaTemp.getCosto()+
+                        " WHERE idtarea="+ tareaTemp.getIdtarea()+";";
+                conexion.getSql().executeUpdate(sql);
+            }
+            System.out.println("Los costos de tareas se actualizaron correctamente.");
+        }catch(SQLException e){
+            System.out.println("Los costos NO se actualizaron correctamente: "+e);
+        }
+    }
+    
     public void actualizarGradoAvance(ArrayList<Tarea> tareas){
         try{
             for(Tarea tareaTemp: tareas){
@@ -34,9 +61,9 @@ public class TareaDAO {
                         " WHERE idtarea="+ tareaTemp.getIdtarea()+";";
                 conexion.getSql().executeUpdate(sql);
             }
-            System.out.println("Las tareas se actualizaron correctamente.");
+            System.out.println("Los grados de avance de tareas se actualizaron correctamente.");
         }catch(SQLException e){
-            System.out.println("Las tareas no se actualizaron correctamente: "+e);
+            System.out.println("Los grados de avance NO se actualizaron correctamente: "+e);
         }
     }
     
