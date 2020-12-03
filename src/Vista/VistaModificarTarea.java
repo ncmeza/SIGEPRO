@@ -25,6 +25,7 @@ public static final String BTN_ACTUALIZAR_PROGRESO= "actualizar el progreso de l
     public VistaModificarTarea() {
         initComponents();
         this.setTitle("Modificar Tarea");
+        
     }
     public void ejecutar (){
         this.setLocationRelativeTo(null);
@@ -35,7 +36,7 @@ public static final String BTN_ACTUALIZAR_PROGRESO= "actualizar el progreso de l
         jButton3.setActionCommand(BTN_ACTUALIZAR_PROGRESO);
         jButton1.addActionListener(control);
         jButton3.addActionListener(control);
-         setFase();
+        
         }
     
      public int getIdTarea (){
@@ -98,16 +99,62 @@ public static final String BTN_ACTUALIZAR_PROGRESO= "actualizar el progreso de l
       public void setCostoTarea(float costo){
         jTextField4.setText(Float.toString(costo));
     }
-         public void setFase(){
+       public void setFase(int idfase){
+          if(idfase==1){
+          jComboBox1.addItem("Analisis");//1
+          jComboBox1.addItem("Desarrollo");//2
+          jComboBox1.addItem("Implementacion");//3
+          jComboBox1.addItem("Produccion");//4
+          jComboBox1.addItem("Mantenimiento");//5
+          }else{
+          if(idfase==2){
+          jComboBox1.addItem("Desarrollo");//1
+          jComboBox1.addItem("Analisis");//2
+          jComboBox1.addItem("Implementacion");//3
+          jComboBox1.addItem("Produccion");//4
+          jComboBox1.addItem("Mantenimiento");//5
+          }else{
+          if(idfase==3){
+          jComboBox1.addItem("Implementacion");
+          jComboBox1.addItem("Analisis");
+          jComboBox1.addItem("Desarrollo");
+          jComboBox1.addItem("Produccion");
+          jComboBox1.addItem("Mantenimiento");
+          }else{
+          if(idfase==4){
+          jComboBox1.addItem("Produccion");
+          jComboBox1.addItem("Analisis");
+          jComboBox1.addItem("Desarrollo");
+          jComboBox1.addItem("Implementacion");
+          jComboBox1.addItem("Mantenimiento");
+          }else{
+          if(idfase==5){
+          jComboBox1.addItem("Mantenimiento");
           jComboBox1.addItem("Analisis");
           jComboBox1.addItem("Desarrollo");
           jComboBox1.addItem("Implementacion");
           jComboBox1.addItem("Produccion");
-          jComboBox1.addItem("Mantenimiento");
+                          }
+          }
+          }
+          }
+          }
       }
       public int getFase(){
-
-          return jComboBox1.getSelectedIndex() + 1;
+           if(jComboBox1.getSelectedItem().toString()=="Analisis"){
+            return 1;
+           }
+           if(jComboBox1.getSelectedItem().toString()=="Desarrollo"){
+           return 2;
+           }
+           if(jComboBox1.getSelectedItem().toString()=="Implementacion"){
+           return 3;
+           }
+           if(jComboBox1.getSelectedItem().toString()=="Produccion"){
+           return 4;
+           }else{
+           return 5;
+           }
       }
     /**
      * This method is called from within the constructor to initialize the form.
