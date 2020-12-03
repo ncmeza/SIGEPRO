@@ -22,6 +22,23 @@ public class PersonalDAO {
     
     public Personal login(String usuario, String clave){
         //retornar un personal que coincida con clave y usuario, crear columnas clave, usuario en la tabla
+        
+        try{
+            String sql = "SELECT personal.* FROM personal WHERE personal.usuario="+ usuario +" AND personal.clave="+ clave +";";
+            ResultSet fila = conexion.getSql().executeQuery(sql);
+            Personal personal = new Personal();
+            if(fila.next()){
+                personal.setLegajo(fila.getInt("legajo"));
+                personal.setApellido(fila.getString("apellido"));
+                personal.setNombre(fila.getString("nombre"));
+                personal.setDni(fila.getInt("dni"));
+                personal.setRolPersonal(fila.getInt("rol_personal_idrol_personal"));
+            }
+            System.out.println("El personal del login fue recuperado correctamente.");
+            return personal;
+        }catch(SQLException e){
+            System.out.println("El personal del login NO fue recuperado correctamente: "+e);
+        }
         return null;
     }
     
