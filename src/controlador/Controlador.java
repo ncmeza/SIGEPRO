@@ -329,7 +329,7 @@ public class Controlador implements ActionListener {
     
     public void actualizarProyecto(Proyecto proyecto){
         ProyectoDAO proyectoDAO = new ProyectoDAO(conexion);
-        proyectoDAO.actualizarAvancePromedio(proyectoBuscado);
+        proyectoDAO.modificarProyecto(proyectoBuscado);
     }
     
     public void actualizarTareaVistaProyecto(Tarea tarea){
