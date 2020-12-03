@@ -90,18 +90,21 @@ public class TareaDAO {
                     tareaTmp.setFechaFin(row.getDate("fecha_fin"));
                     tareaTmp.setGradoAvance(row.getInt("grado_avance"));
                     tareaTmp.setCosto(row.getFloat("costo_tarea"));
-                    String sqlTarea = "SELECT personal_legajo FROM personal_tarea WHERE tarea_idtarea="+ tareaTmp.getIdtarea() + ";";
-                    ResultSet filaTarea = conexion.getSql().executeQuery(sqlTarea);
-                    if(filaTarea.next()){
-                        tareaTmp.setPersonalLegajo(filaTarea.getInt("personal_legajo"));
-                    }
-                    
-                    tareas.add(tareaTmp);
+                    tareas.add(tareaTmp);   
                 }
             }
-            
-            
-            
+            for(Tarea tareaAux: tareas){
+                try{
+                    String sqlTarea = "SELECT personal_legajo FROM personal_tarea WHERE tarea_idtarea="+ tareaAux.getIdtarea() + ";";
+                    ResultSet filaTarea = conexion.getSql().executeQuery(sqlTarea);
+                    if(filaTarea.next()){
+                        tareaAux.setPersonalLegajo(filaTarea.getInt("personal_legajo"));
+                    }
+                    System.out.println("Legajo de personal recuperado correctamente.");
+                }catch(SQLException e){
+                System.out.println("Legajo de personal NO recuperado correctamente: "+e);
+                }
+            }
         }catch(SQLException e){
             System.out.println("Error al obtener tareas del proyecto: "+e);
         }

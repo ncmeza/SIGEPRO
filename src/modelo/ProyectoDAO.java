@@ -32,7 +32,7 @@ public class ProyectoDAO {
             String sql = "UPDATE proyecto SET descripcion_proyecto='"+ proyecto.getDescripcion()+
                     "', promedio_avance="+ proyecto.getAvancePromedio()+
                     ", costo_proyecto="+ proyecto.getCostoProyecto()+
-                    ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+";";
+                    ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+"';";
             conexion.getSql().executeUpdate(sql);
             System.out.println("Proyecto: "+proyecto.getDescripcion()+" actualizado correctamente.");
         }catch(SQLException e){
@@ -84,8 +84,8 @@ public class ProyectoDAO {
                     "', promedio_avance="+ proyecto.calcularGradoAvance()+
                     ", costo_proyecto="+ proyecto.calcularCosto()+
                     ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+
-                    ", visibilidad="+ proyecto.getVisibilidad() + 
-                    "', cliente_idcliente=" + proyecto.getIdcliente()+ ";";
+                    "', visibilidad="+ proyecto.getVisibilidad() + 
+                    ", cliente_idcliente=" + proyecto.getIdcliente()+ ";";
             conexion.getSql().execute(sql);
             sql = "INSERT INTO proyecto_fase SET proyecto_idproyecto="+ proyecto.getIdproyecto()+ ", fase_idfase=" + 1 + ";";
             conexion.getSql().execute(sql);

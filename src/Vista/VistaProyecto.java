@@ -517,18 +517,18 @@ public static final String BTN_AGREGAR_TAREA_DE_BUSCAR = "agrega tarea a proyect
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-          if(jTable1.getSelectedRowCount()>0){
-          vistamodificar.setNombreTarea(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-          vistamodificar.setDescripcionTarea(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-          vistamodificar.setFechaInicio(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-          vistamodificar.setFechaFin(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-          String Grado=jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString();
-          int Grado2=Integer.parseInt(Grado);
-          vistamodificar.setGradoAvance(Grado2);
-          String Costo=jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString();
-          int Costo2=Integer.parseInt(Costo);
-          vistamodificar.setCostoTarea(Costo2);
-    }
+//          if(jTable1.getSelectedRowCount()>0){
+//          vistamodificar.setNombreTarea(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+//          vistamodificar.setDescripcionTarea(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+//          vistamodificar.setFechaInicio(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+//          vistamodificar.setFechaFin(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+//          String Grado=jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString();
+//          int Grado2=Integer.parseInt(Grado);
+//          vistamodificar.setGradoAvance(Grado2);
+//          String Costo=jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString();
+//          int Costo2=Integer.parseInt(Costo);
+//          vistamodificar.setCostoTarea(Costo2);
+//    }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
