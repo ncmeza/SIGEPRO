@@ -24,13 +24,30 @@ public class ProyectoDAO {
         this.conexion = conexion;
     }
     
+    public void modificarProyecto(Proyecto proyecto){
+        TareaDAO tareadao = new TareaDAO(conexion);
+        try{
+            tareadao.actualizarGradoAvance(proyecto.getTareas());
+            tareadao.actualizarCostoTarea(proyecto.getTareas());
+            String sql = "UPDATE proyecto SET descripcion_proyecto='"+ proyecto.getDescripcion()+
+                    "', promedio_avance="+ proyecto.getAvancePromedio()+
+                    ", costo_proyecto="+ proyecto.getCostoProyecto()+
+                    ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+";";
+            conexion.getSql().executeUpdate(sql);
+            System.out.println("Proyecto: "+proyecto.getDescripcion()+" actualizado correctamente.");
+        }catch(SQLException e){
+            System.out.println("Error al actualizar proyecto: "+e);
+        }
+    }
+    
     public void actualizarAvancePromedio(Proyecto proyecto){
         TareaDAO tareadao = new TareaDAO(conexion);
         try{
+            tareadao.actualizarGradoAvance(proyecto.getTareas());
             String sql = "UPDATE proyecto SET promedio_avance="+ proyecto.calcularGradoAvance()+
                     " WHERE idproyecto="+proyecto.getIdproyecto()+";";
             conexion.getSql().executeUpdate(sql);
-            tareadao.actualizarGradoAvance(proyecto.getTareas());
+            //actualizarGradoAvance lo pasé para arriba
             System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+"  se actualizó correctamente.");
         }catch(SQLException e){
             System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+" no se actualizó correctamente:"

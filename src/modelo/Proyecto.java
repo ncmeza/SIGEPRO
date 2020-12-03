@@ -42,6 +42,12 @@ public class Proyecto {
         this.visibilidad = true;
     }
     
+//    public Tarea buscarTareaPorId(int idtarea){
+//        Tarea tareaEncontrada = new Tarea();{
+//            for(Tarea tarea: )
+//        }
+//    }
+    
     public float calcularGradoAvance(){
         int suma = 0;
         for(Tarea tarea: tareas){

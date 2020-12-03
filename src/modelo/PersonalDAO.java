@@ -24,7 +24,7 @@ public class PersonalDAO {
         //retornar un personal que coincida con clave y usuario, crear columnas clave, usuario en la tabla
         
         try{
-            String sql = "SELECT personal.* FROM personal WHERE personal.usuario="+ usuario +" AND personal.clave="+ clave +";";
+            String sql = "SELECT personal.* FROM personal WHERE usuario='"+ usuario +"' AND clave='"+ clave +"';";
             ResultSet fila = conexion.getSql().executeQuery(sql);
             Personal personal = new Personal();
             if(fila.next()){
