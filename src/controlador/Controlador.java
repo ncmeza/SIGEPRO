@@ -100,6 +100,7 @@ public class Controlador implements ActionListener {
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_CREAR_PROYECTO)){
+            
             nuevoProyecto.setIdproyecto(vistaProyecto.getIdProyecto());
             nuevoProyecto.setDescripcion(vistaProyecto.getDescripcion());
             nuevoProyecto.setResponsableProyecto(vistaProyecto.getResponsable());          
@@ -107,6 +108,7 @@ public class Controlador implements ActionListener {
             ProyectoDAO proyectodao = new ProyectoDAO(nuevoProyecto, conexion);
             proyectodao.agregar();
             nuevoProyecto = new Proyecto();
+            JOptionPane.showMessageDialog(null, "Se creo el proyecto con sus tareas exitosamente");
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_AGREGAR_TAREA)){
