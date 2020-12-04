@@ -25,9 +25,9 @@ public class ProyectoDAO {
         this.conexion = conexion;
     }
     
-    public void eliminarProyecto(){
+    public void eliminarProyecto(Proyecto proyectoTemp){
         try{
-            String sql = "UPDATE proyecto SET visibilidad="+false+" WHERE idproyecto="+ proyecto.getIdproyecto()+";";
+            String sql = "UPDATE proyecto SET visibilidad="+false+" WHERE idproyecto="+ proyectoTemp.getIdproyecto()+";";
             conexion.getSql().executeUpdate(sql);
             System.out.println("Proyecto eliminado correctamente.");
         }catch(SQLException e){
