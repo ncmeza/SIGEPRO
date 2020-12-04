@@ -25,6 +25,16 @@ public class ProyectoDAO {
         this.conexion = conexion;
     }
     
+    public void eliminarProyecto(){
+        try{
+            String sql = "UPDATE proyecto SET visibilidad="+false+" WHERE idproyecto="+ proyecto.getIdproyecto()+";";
+            conexion.getSql().executeUpdate(sql);
+            System.out.println("Proyecto eliminado correctamente.");
+        }catch(SQLException e){
+            System.out.println("No se pudo eliminar proyecto: "+e);
+        }
+    }
+    
     public ArrayList<Proyecto> buscarProyectos(){
         ArrayList<Proyecto> proyectos = new ArrayList<>();
         Boolean vis = true;
@@ -72,7 +82,7 @@ public class ProyectoDAO {
                     " WHERE idproyecto="+proyecto.getIdproyecto()+";";
             conexion.getSql().executeUpdate(sql);
             //actualizarGradoAvance lo pasé para arriba
-            System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+"  se actualizó correctamente.");
+            System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+" se actualizó correctamente.");
         }catch(SQLException e){
             System.out.println("El promedio avance de proyecto "+proyecto.getDescripcion()+" no se actualizó correctamente:"
                     + "\n"+e);
@@ -83,7 +93,7 @@ public class ProyectoDAO {
         Proyecto proyectoTmp = new Proyecto();
         TareaDAO tareadao = new TareaDAO(conexion);
         try{
-            String sql = "SELECT proyecto.* FROM proyecto WHERE proyecto.idproyecto="+ idproyecto +";"; //crear columna visibilidad
+            String sql = "SELECT proyecto.* FROM proyecto WHERE proyecto.idproyecto="+ idproyecto +" AND visibilidad = true;";
             ResultSet fila = conexion.getSql().executeQuery(sql);
             
             if(fila.next()){
