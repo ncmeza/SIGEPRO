@@ -150,6 +150,10 @@ public class Controlador implements ActionListener {
             vistaModificarTarea.setCostoTarea(tarea.getCosto());
         }
         
+        if(e.getActionCommand().equals(vistaProyecto.BTN_ELIMINAR_PROYECTO)){
+            eliminarProyecto(proyectoBuscado);
+        }
+        
         if(e.getActionCommand().equals(vistaModificarTarea.BTN_MODIFICAR_TAREA)){
             Tarea tarea = buscarTareaPorID(vistaModificarTarea.getIdTarea());
             tarea.setNombre(vistaModificarTarea.getNombreTarea());
@@ -355,6 +359,11 @@ public class Controlador implements ActionListener {
     public Personal personalLogin(String usuario, String contra){
         PersonalDAO personalDAO = new PersonalDAO(conexion);
         return personalDAO.login(usuario, contra);
+    }
+    
+    public void eliminarProyecto(Proyecto proyecto){
+        ProyectoDAO proyectoDAO = new ProyectoDAO(conexion);
+        proyectoDAO.eliminarProyecto(proyecto);
     }
     
     public ArrayList<String[]> listaProyectos(){
