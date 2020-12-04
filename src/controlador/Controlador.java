@@ -184,6 +184,7 @@ public class Controlador implements ActionListener {
                     tarea.setGradoAvance(vistaAgregarTarea.getGradoAvance());           
                     tarea.setPersonalLegajo(vistaAgregarTarea.getLegajoPersonal());
                     nuevoProyecto.getTareas().add(tarea);
+                    vistaProyecto.setCostoProyecto(Float.toString(nuevoProyecto.calcularCosto()));
                     vistaAgregarTarea.cargarTareas(listaTareas(nuevoProyecto));
                 }else{
                     JOptionPane.showMessageDialog(null, "La tarea ya existe");
