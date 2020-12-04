@@ -227,7 +227,9 @@ public class Controlador implements ActionListener {
         }
         
         if(e.getActionCommand().equals(vistaProyecto.BTN_AGREGAR_TAREA_DE_BUSCAR)){
-            vistaProyecto.cargarListaDeTareas(listaProyectos());
+            vistaMostrarDatos = new VistaMostrarDatos();
+            vistaMostrarDatos.ejecutar();
+            vistaMostrarDatos.cargarListaProyectos(listaProyectos());           
         }
         
            
