@@ -6,6 +6,7 @@
 package modelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,6 +25,27 @@ public class ProyectoDAO {
         this.conexion = conexion;
     }
     
+    public ArrayList<Proyecto> buscarProyectos(){
+        ArrayList<Proyecto> proyectos = new ArrayList<>();
+        try{
+            String sql = "SELECT proyecto.* FROM proyecto WHILE visibilidad="+true+";";
+            ResultSet fila = conexion.getSql().executeQuery(sql);
+            while(fila.next()){
+                Proyecto proyectoTemp = new Proyecto();
+                proyectoTemp.setIdproyecto(fila.getInt("idproyecto"));
+                proyectoTemp.setDescripcion(fila.getString("descripcion_proyecto"));
+                proyectoTemp.setAvancePromedio(fila.getFloat("promedio_avance"));
+                proyectoTemp.setCostoProyecto(fila.getFloat("costo_proyecto"));
+                proyectoTemp.setResponsableProyecto(fila.getString("responsable_proyecto"));
+                proyectoTemp.setIdcliente(fila.getInt("cliente_idcliente"));
+            }
+            System.out.println("Todos los proyectos fueron recuperados correctamente.");
+        }catch(SQLException e){
+            System.out.println("Los proyectos NO se recuperaron correctamente: "+e);
+        }
+        return proyectos;
+    }
+    
     public void modificarProyecto(Proyecto proyecto){
         TareaDAO tareadao = new TareaDAO(conexion);
         try{
@@ -32,7 +54,7 @@ public class ProyectoDAO {
             String sql = "UPDATE proyecto SET descripcion_proyecto='"+ proyecto.getDescripcion()+
                     "', promedio_avance="+ proyecto.getAvancePromedio()+
                     ", costo_proyecto="+ proyecto.getCostoProyecto()+
-                    ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+"';";
+                    ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+"' WHERE idproyecto="+ proyecto.getIdproyecto()+";";
             conexion.getSql().executeUpdate(sql);
             System.out.println("Proyecto: "+proyecto.getDescripcion()+" actualizado correctamente.");
         }catch(SQLException e){
@@ -71,8 +93,9 @@ public class ProyectoDAO {
                 proyectoTmp.setIdcliente(fila.getInt("cliente_idcliente"));
                 proyectoTmp.setTareas(tareadao.buscarTareaPorProyecto(idproyecto));
             }
+            System.out.println("Proyecto buscado por idproyecto encontrado.");
         }catch(SQLException e){
-            
+            System.out.println("El proyecto buscado por idproyecto no se encontró: "+e);
         }
         return proyectoTmp;
     }

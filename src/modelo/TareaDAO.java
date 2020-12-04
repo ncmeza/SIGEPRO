@@ -27,17 +27,20 @@ public class TareaDAO {
         this.conexion = conexion;
     }
     
+    
     public void modificarTarea(Tarea tareaTemp){
+        SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
         try{
             String sql = "UPDATE tarea SET nombre_tarea='"+ tareaTemp.getNombre()+
-                    "', descripcion_tarea="+ tareaTemp.getDescripcion()+
-                    "', fecha_inicio="+ tareaTemp.getFechaInicio()+
-                    ", fecha_fin="+ tareaTemp.getFechaFin()+
-                    ", grado_avance="+ tareaTemp.getGradoAvance()+
+                    "', descripcion_tarea='"+ tareaTemp.getDescripcion()+
+                    "', fecha_inicio='"+ DateFor.format(tareaTemp.getFechaInicio())+
+                    "', fecha_fin='"+ DateFor.format(tareaTemp.getFechaFin())+
+                    "', grado_avance="+ tareaTemp.getGradoAvance()+
                     ", costo_tarea="+ tareaTemp.getCosto()+" WHERE idtarea="+ tareaTemp.getIdtarea()+";";
             conexion.getSql().executeUpdate(sql);
+            System.out.println("Tarea "+tareaTemp.getNombre()+" modificada correctamente.");
         }catch(SQLException e){
-            
+            System.out.println("Tarea "+tareaTemp.getNombre()+" NO modificada correctamente: "+e);
         }
     }
     
@@ -90,7 +93,7 @@ public class TareaDAO {
                     tareaTmp.setFechaFin(row.getDate("fecha_fin"));
                     tareaTmp.setGradoAvance(row.getInt("grado_avance"));
                     tareaTmp.setCosto(row.getFloat("costo_tarea"));
-                    tareas.add(tareaTmp);   
+                    tareas.add(tareaTmp); 
                 }
             }
             for(Tarea tareaAux: tareas){
