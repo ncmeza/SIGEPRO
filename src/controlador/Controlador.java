@@ -26,6 +26,7 @@ public class Controlador implements ActionListener {
     private VistaDesarrollador vistaDesarrollador;
     private VistaInicioSesion vistaInicioSesion;
     private VistaModificarTarea vistaModificarTarea;
+    private VistaMostrarDatos vistaMostrarDatos;
     private Conexion conexion;
     private Personal personalDesarrollo; //esto es temporal, se tiene que instanciar en el login
     private Proyecto nuevoProyecto;
@@ -225,6 +226,10 @@ public class Controlador implements ActionListener {
             vistaDesarrollador.cargarListaDeTareas(tareasDeUnDesarrollador(proyectoBuscado));
         }
         
+        if(e.getActionCommand().equals(vistaProyecto.BTN_AGREGAR_TAREA_DE_BUSCAR)){
+            vistaProyecto.cargarListaDeTareas(listaProyectos());
+        }
+        
            
     } 
         
@@ -345,5 +350,23 @@ public class Controlador implements ActionListener {
     public Personal personalLogin(String usuario, String contra){
         PersonalDAO personalDAO = new PersonalDAO(conexion);
         return personalDAO.login(usuario, contra);
+    }
+    
+    public ArrayList<String[]> listaProyectos(){
+        
+        ArrayList lista = new ArrayList();
+        ProyectoDAO proyectoDAO = new ProyectoDAO(conexion);
+        for(Proyecto proyecto: proyectoDAO.buscarProyectos()){
+            String[] fila = new String[6];
+            fila[0]=""+ proyecto.getIdproyecto();
+            fila[1] = ""+ proyecto.getDescripcion();
+            fila[2] = ""+ proyecto.getAvancePromedio();
+            fila[3] = ""+ proyecto.getCostoProyecto();
+            fila[4] = ""+ proyecto.getResponsableProyecto();
+            fila[5] = ""+ proyecto.getIdcliente();
+            
+            lista.add(fila);
+        }
+        return lista;
     }
 }
