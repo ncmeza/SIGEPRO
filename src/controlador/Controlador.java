@@ -54,10 +54,12 @@ public class Controlador implements ActionListener {
         if(e.getActionCommand().equals(vistaInicioSesion.BTN_INGRESAR)){
             Personal personal = personalLogin(vistaInicioSesion.getUsuario(),vistaInicioSesion.getContraseña());
             if(personal.getRolPersonal() == 1){
+                vistaProyecto = new VistaProyecto();
                 nuevoProyecto = new Proyecto();
                 vistaProyecto.setControlador(this);
                 vistaProyecto.ejecutar();
             }else{
+                vistaDesarrollador = new VistaDesarrollador();
                 vistaDesarrollador.setControlador(this);
                 vistaDesarrollador.ejecutar();
                 personalDesarrollo = personal;
