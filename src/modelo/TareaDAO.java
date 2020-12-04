@@ -33,7 +33,8 @@ public class TareaDAO {
         try{
             String sql = "UPDATE tarea SET nombre_tarea='"+ tareaTemp.getNombre()+
                     "', descripcion_tarea='"+ tareaTemp.getDescripcion()+
-                    "', fecha_inicio='"+ DateFor.format(tareaTemp.getFechaInicio())+
+                    "', idfase="+ tareaTemp.getIdfase() +
+                    ", fecha_inicio='"+ DateFor.format(tareaTemp.getFechaInicio())+
                     "', fecha_fin='"+ DateFor.format(tareaTemp.getFechaFin())+
                     "', grado_avance="+ tareaTemp.getGradoAvance()+
                     ", costo_tarea="+ tareaTemp.getCosto()+" WHERE idtarea="+ tareaTemp.getIdtarea()+";";

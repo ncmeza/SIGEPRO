@@ -73,7 +73,7 @@ public static final String BTN_INGRESAR = "boton para iniciar sesion";
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel1.setText("Legajo del Usuario");
+        jLabel1.setText("Nombre de Usuario");
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel2.setText("Contraseña del Usuario");

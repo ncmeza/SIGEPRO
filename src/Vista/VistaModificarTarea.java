@@ -141,8 +141,9 @@ public static final String BTN_ACTUALIZAR_PROGRESO= "actualizar el progreso de l
           }
       }
       public int getFase(){
+         
            if(jComboBox1.getSelectedItem().toString()=="Analisis"){
-            return 1;
+           return 1;
            }
            if(jComboBox1.getSelectedItem().toString()=="Desarrollo"){
            return 2;
@@ -155,6 +156,7 @@ public static final String BTN_ACTUALIZAR_PROGRESO= "actualizar el progreso de l
            }else{
            return 5;
            }
+           
       }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -435,7 +437,7 @@ public static final String BTN_ACTUALIZAR_PROGRESO= "actualizar el progreso de l
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
      int a = Integer.parseInt(jTextField5.getText());
-     BarraProgreso.setValue(BarraProgreso.getValue()+a);
+     BarraProgreso.setValue(a);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
