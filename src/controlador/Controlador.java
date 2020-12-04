@@ -155,6 +155,7 @@ public class Controlador implements ActionListener {
             tarea.setFechaInicio(vistaModificarTarea.getFechaInicio());
             tarea.setFechaFin(vistaModificarTarea.getFechaFin());
             tarea.setGradoAvance(vistaModificarTarea.getGradoAvance());
+            tarea.setCosto(vistaModificarTarea.getCostoTarea());
             vistaProyecto.cargarListaDeTareas(listaTareas(proyectoBuscado));
             actualizarTareaVistaProyecto(tarea);
             proyectoBuscado = buscarProyectoPorID(vistaProyecto.getIdProyectoBuscarPro());
@@ -221,6 +222,7 @@ public class Controlador implements ActionListener {
             Tarea tareaActualizada = buscarTareaPorID(vistaDesarrollador.getIDTarea());
             tareaActualizada.setGradoAvance(vistaDesarrollador.getGradoAvance());
             actualizarTareaVistaDesarrollador();
+            vistaDesarrollador.cargarListaDeTareas(tareasDeUnDesarrollador(proyectoBuscado));
         }
         
            
