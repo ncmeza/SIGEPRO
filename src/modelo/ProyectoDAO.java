@@ -54,8 +54,8 @@ public class ProyectoDAO {
             tareadao.actualizarGradoAvance(proyecto.getTareas());
             tareadao.actualizarCostoTarea(proyecto.getTareas());
             String sql = "UPDATE proyecto SET descripcion_proyecto='"+ proyecto.getDescripcion()+
-                    "', promedio_avance="+ proyecto.getAvancePromedio()+
-                    ", costo_proyecto="+ proyecto.getCostoProyecto()+
+                    "', promedio_avance="+ proyecto.calcularGradoAvance()+
+                    ", costo_proyecto="+ proyecto.calcularCosto()+
                     ", responsable_proyecto='"+ proyecto.getResponsableProyecto()+"' WHERE idproyecto="+ proyecto.getIdproyecto()+";";
             conexion.getSql().executeUpdate(sql);
             System.out.println("Proyecto: "+proyecto.getDescripcion()+" actualizado correctamente.");

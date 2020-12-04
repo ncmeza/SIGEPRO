@@ -53,6 +53,7 @@ public class Proyecto {
         for(Tarea tarea: tareas){
             suma = suma + tarea.getGradoAvance();
         }
+        System.out.println("Avance Promedio: "+ suma/tareas.size());
         return suma/tareas.size();
     }
     
