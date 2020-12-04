@@ -359,13 +359,14 @@ public class Controlador implements ActionListener {
         ArrayList lista = new ArrayList();
         ProyectoDAO proyectoDAO = new ProyectoDAO(conexion);
         for(Proyecto proyecto: proyectoDAO.buscarProyectos()){
-            String[] fila = new String[6];
+            String[] fila = new String[7];
             fila[0]=""+ proyecto.getIdproyecto();
             fila[1] = ""+ proyecto.getDescripcion();
             fila[2] = ""+ proyecto.getAvancePromedio();
             fila[3] = ""+ proyecto.getCostoProyecto();
             fila[4] = ""+ proyecto.getResponsableProyecto();
             fila[5] = ""+ proyecto.getIdcliente();
+            fila[6] = ""+ buscarClientePorID(proyecto.getIdcliente()).getRazonSocial();
             
             lista.add(fila);
         }
