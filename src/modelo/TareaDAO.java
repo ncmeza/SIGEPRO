@@ -27,6 +27,31 @@ public class TareaDAO {
         this.conexion = conexion;
     }
     
+    public void agregarTareaNueva(Proyecto proyecto){
+        SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
+        Tarea tareaTemp = proyecto.getTareas().get(proyecto.getTareas().size()-1);
+        try{
+            String sql = "INSERT INTO adm_rec.tarea SET idtarea="+ tareaTemp.getIdtarea()+
+                    ", idfase="+ tareaTemp.getIdfase()+ 
+                    ", nombre_tarea='"+ tareaTemp.getNombre()+
+                    "', descripcion_tarea='"+ tareaTemp.getDescripcion() +
+                    "', fecha_inicio='"+ DateFor.format(tareaTemp.getFechaInicio()) +
+                    "', fecha_fin='"+ DateFor.format(tareaTemp.getFechaFin()) +
+                    "', grado_avance="+ tareaTemp.getGradoAvance() +
+                    ", costo_tarea="+ tareaTemp.getCosto()+
+                    ", proyecto_fase_idproyecto_fase="+ tareaTemp.getIdproyecto_fase()+";";
+            conexion.getSql().execute(sql);
+            
+            sql = "INSERT INTO adm_rec.personal_tarea SET tarea_idtarea="+ tarea.getIdtarea()+
+                    ", personal_legajo="+ tarea.getPersonalLegajo()+";";
+            conexion.getSql().execute(sql);
+            
+            System.out.println("Tarea nueva agregada correctamente.");
+        }catch(SQLException e){
+            System.out.println("Tarea nueva NO se agrego correctamente: "+e);
+        }
+    }
+    
     
     public void modificarTarea(Tarea tareaTemp){
         SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
