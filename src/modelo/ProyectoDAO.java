@@ -38,6 +38,7 @@ public class ProyectoDAO {
                 proyectoTemp.setCostoProyecto(fila.getFloat("costo_proyecto"));
                 proyectoTemp.setResponsableProyecto(fila.getString("responsable_proyecto"));
                 proyectoTemp.setIdcliente(fila.getInt("cliente_idcliente"));
+                proyectos.add(proyecto);
             }
             System.out.println("Todos los proyectos fueron recuperados correctamente.");
         }catch(SQLException e){
