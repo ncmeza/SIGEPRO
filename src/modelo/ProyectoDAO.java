@@ -27,8 +27,9 @@ public class ProyectoDAO {
     
     public ArrayList<Proyecto> buscarProyectos(){
         ArrayList<Proyecto> proyectos = new ArrayList<>();
+        Boolean vis = true;
         try{
-            String sql = "SELECT proyecto.* FROM proyecto WHILE visibilidad="+true+";";
+            String sql = "SELECT proyecto.* FROM proyecto WHERE visibilidad="+ true +";";
             ResultSet fila = conexion.getSql().executeQuery(sql);
             while(fila.next()){
                 Proyecto proyectoTemp = new Proyecto();
@@ -38,7 +39,7 @@ public class ProyectoDAO {
                 proyectoTemp.setCostoProyecto(fila.getFloat("costo_proyecto"));
                 proyectoTemp.setResponsableProyecto(fila.getString("responsable_proyecto"));
                 proyectoTemp.setIdcliente(fila.getInt("cliente_idcliente"));
-                proyectos.add(proyecto);
+                proyectos.add(proyectoTemp);
             }
             System.out.println("Todos los proyectos fueron recuperados correctamente.");
         }catch(SQLException e){
