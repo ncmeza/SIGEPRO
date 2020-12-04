@@ -27,11 +27,18 @@ public class TareaDAO {
         this.conexion = conexion;
     }
     
-    public void agregarTareaNueva(Proyecto proyecto){
+    public void agregarTareaNueva(Proyecto proyectoTemp){
         SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
-        Tarea tareaTemp = proyecto.getTareas().get(proyecto.getTareas().size()-1);
+        Tarea tareaTemp = proyectoTemp.getTareas().get(proyectoTemp.getTareas().size()-1);
         try{
-            String sql = "INSERT INTO adm_rec.tarea SET idtarea="+ tareaTemp.getIdtarea()+
+            String sql = "SELECT proyecto_fase.idproyecto_fase FROM proyecto_fase WHERE proyecto_idproyecto="+ proyectoTemp.getIdproyecto()+" AND fase_idfase="+ tareaTemp.getIdfase()+";";
+                ResultSet fila = conexion.getSql().executeQuery(sql);
+                int idproyecto_fase = 0;
+                if(fila.next()){
+                    idproyecto_fase = (fila.getInt("idproyecto_fase"));
+                }
+                tareaTemp.setIdproyecto_fase(idproyecto_fase);
+            sql = "INSERT INTO adm_rec.tarea SET idtarea="+ tareaTemp.getIdtarea()+
                     ", idfase="+ tareaTemp.getIdfase()+ 
                     ", nombre_tarea='"+ tareaTemp.getNombre()+
                     "', descripcion_tarea='"+ tareaTemp.getDescripcion() +
@@ -42,8 +49,8 @@ public class TareaDAO {
                     ", proyecto_fase_idproyecto_fase="+ tareaTemp.getIdproyecto_fase()+";";
             conexion.getSql().execute(sql);
             
-            sql = "INSERT INTO adm_rec.personal_tarea SET tarea_idtarea="+ tarea.getIdtarea()+
-                    ", personal_legajo="+ tarea.getPersonalLegajo()+";";
+            sql = "INSERT INTO adm_rec.personal_tarea SET tarea_idtarea="+ tareaTemp.getIdtarea()+
+                    ", personal_legajo="+ tareaTemp.getPersonalLegajo()+";";
             conexion.getSql().execute(sql);
             
             System.out.println("Tarea nueva agregada correctamente.");
